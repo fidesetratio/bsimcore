@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace='com.app.dao.BsimDao'>
+<select id="selectBankPusat" resultType="java.util.HashMap" parameterType="string">
+        SELECT "EKA"."LST_BANK_PUSAT"."LSBP_ID" AS bank_id,   
+         "EKA"."LST_BANK_PUSAT"."LSBP_NAMA"  AS bank_nama,
+         "EKA"."LST_BANK_PUSAT"."LSBP_PANJANG_REKENING"  AS max_digit
+            FROM EKA.LST_BANK_PUSAT
+            WHERE  "EKA"."LST_BANK_PUSAT"."LSBP_ID" = #{lsbp_id}
+            and flag_aktif = 1
+            ORDER BY "EKA"."LST_BANK_PUSAT"."LSBP_NAMA" ASC
+    </select>
+	<select id="selectdatapolicypas" resultType="java.util.HashMap" parameterType="string">
+        select mkp.reg_spaj , mp.mspo_policy_no , MKP.PREMI , MKP.UP , MKP.NO_VA , MCN.MCL_FIRST
+		from eka.mst_kartu_pas mkp , eka.mst_policy mp , eka.mst_client_new mcn
+		where mkp.reg_spaj = mp.reg_spaj and MP.MSPO_POLICY_HOLDER = mcn.mcl_id and mkp.reg_spaj = #{spaj} 
+    </select>
+    <select id="selectMstKartuPas" resultType="java.util.HashMap" parameterType="string">
+        select * from eka.mst_kartu_pas 
+				  where product_code = '73' 
+					      and product_sub_code = '14' 
+					      and produk = 16 
+					      and reg_spaj is null 
+					      and flag_active = 0 
+					      and no_va is not null 
+					      and premi = #{premi} 
+						  and rownum = 1      
+				  order by no_kartu asc FOR UPDATE
+    </select>
+    <!-- sysdate -->
+	<select id="selectSysdate" resultType="date">
+		select sysdate from dual
+	</select>
+	
+	 	<!-- Select counter, client id-->
+	<select id="select_counter" resultType="long" parameterType="java.util.HashMap">
+		SELECT EKA.MST_COUNTER.MSCO_VALUE
+		FROM EKA.MST_COUNTER
+		WHERE EKA.MST_COUNTER.MSCO_NUMBER = #{number} AND 
+		EKA.MST_COUNTER.LCA_ID =  #{lca_id} FOR UPDATE
+	</select> 
+	
+	<!-- Select untuk bulan tahun sequence -->
+	<select id="selectGetCounterMonthYear" resultType="string" parameterType="java.util.HashMap">
+		SELECT msco_month_year
+		FROM       eka.mst_counter a		
+		WHERE a.msco_number = #{aplikasi} AND a.lca_id = #{cabang}
+		FOR UPDATE
+	</select>
+	
+</mapper>

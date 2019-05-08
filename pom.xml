@@ -1,0 +1,108 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.app</groupId>
+  <artifactId>bsim</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <description>Bank Sinarmas &amp; Bank Sinarmas Syariah</description>
+  
+  <properties>
+  	<project.buildSourceEncoding>UTF-8</project.buildSourceEncoding>
+  	<java.version>1.8</java.version>
+  	<ibatis.version>3.3.1</ibatis.version>
+  	<ibatis.spring.version>1.1.1</ibatis.spring.version>
+  </properties>
+  
+  
+   <parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.0.RELEASE</version>
+		<relativePath />
+	</parent>
+  
+  <dependencies>
+  	<dependency>
+  		<groupId>org.springframework.boot</groupId>
+  		<artifactId>spring-boot-starter-web</artifactId>
+  	</dependency>
+  	
+  	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+	</dependency>
+  	
+  	<dependency>
+	    <groupId>org.mybatis</groupId>
+	    <artifactId>mybatis</artifactId>
+	    <version>${ibatis.version}</version>
+	</dependency>
+	
+	
+	<dependency>
+	    <groupId>org.mybatis</groupId>
+	    <artifactId>mybatis-spring</artifactId>
+	    <version>${ibatis.spring.version}</version>
+	</dependency> 
+	
+	<dependency>
+	    <groupId>com.oracle</groupId>
+	    <artifactId>ojdbc6</artifactId>
+	    <version>11.2.0</version>
+	</dependency>
+	
+	
+	<dependency>
+	    <groupId>com.lowagie</groupId>
+	    <artifactId>itext</artifactId>
+	    <version>4.2.2</version>
+	</dependency>
+	
+	<dependency>
+        <groupId>com.itextpdf</groupId>
+        <artifactId>itextpdf</artifactId>
+        <version>5.5.10</version>
+    </dependency>
+	<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+    <scope>test</scope>
+  <dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.12</version>
+    <scope>test</scope>
+</dependency>
+</dependency>
+  	
+  	
+  </dependencies>
+   <build>
+  	<plugins>
+  		<plugin>
+  			<groupId>org.springframework.boot</groupId>
+  			<artifactId>spring-boot-maven-plugin</artifactId>
+  			<configuration>
+                    <executable>true</executable>
+                    <mainClass>com.app.boot.BootApplication</mainClass>
+                    <outputDirectory>${dir}</outputDirectory>
+                </configuration>
+  		</plugin>
+  	</plugins>
+  	   <resources>
+      		   <resource>
+     		   <directory>src/main/resources</directory>
+    		</resource>
+    		<resource>
+     		   <directory>src/main/java</directory>
+     		   <includes>
+        		  <include>**/**/*.xml</include>
+       			 </includes>
+ 			 </resource> 
+      	</resources>
+      	
+  </build>
+  
+  
+  
+  
+</project>
