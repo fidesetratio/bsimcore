@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
+import com.app.model.bsim.Pas;
 import com.app.services.BsimService;
 
 @SpringBootApplication
@@ -28,8 +29,10 @@ public class BsimBootApplication  implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		HashMap<String,Object> map = service.selectMstKartuPas("75000");
 		System.out.println(map.get("NO_KARTU"));
-		Date date= service.selectSysdate();
-		System.out.println("date="+date);
+		//Date date= service.selectSysdate();
+		//System.out.println("date="+date);
+	
+		
 	}
 
 }

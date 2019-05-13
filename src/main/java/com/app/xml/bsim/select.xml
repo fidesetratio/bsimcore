@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
   'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 <mapper namespace='com.app.dao.BsimDao'>
+ 
 <select id="selectBankPusat" resultType="java.util.HashMap" parameterType="string">
         SELECT "EKA"."LST_BANK_PUSAT"."LSBP_ID" AS bank_id,   
          "EKA"."LST_BANK_PUSAT"."LSBP_NAMA"  AS bank_nama,
@@ -48,5 +49,46 @@
 		WHERE a.msco_number = #{aplikasi} AND a.lca_id = #{cabang}
 		FOR UPDATE
 	</select>
-	
+	   
+      <select id="selectBsimNoVaSyariah" resultType="string">
+		select no_va from eka.mst_det_va where no_va like '8076131914%'
+    	and spaj_temp is null 
+        and spaj is null 
+        and no_spaj_gadget is null 
+        and rownum = 1 
+  	    order by create_date, substr(no_va,11,6) asc
+      </select>
+      
+      
+      
+       
+    
+       <select id="selectCekNoKartu" resultType="string" parameterType="string">
+        select produk from eka.mst_kartu_pas where no_kartu = #{no_kartu}
+    </select>
+    
+    
+    <select id="selectDetailKartuPas" resultType="java.util.HashMap" parameterType="string">
+        select
+            a.*,
+            (case when a.jenis = 0 then b.lsdbs_number else c.plan end) plan,
+            (case when a.jenis = 0 then b.lsdbs_name else c.nama_plan end) nama_plan,
+            (case when a.jenis = 0 then b.mpi_mou else d.no_polis end) no_polis_induk
+        from
+            eka.mst_kartu_pas a,
+            eka.lst_det_bisnis b,
+            eka.lst_tm_proddet@eb c,
+            eka.lst_tm_product@eb d
+        where
+            a.product_code = b.lsbs_id(+)
+            and a.product_sub_code = b.lsdbs_number(+)
+            and a.product_code = c.product_code(+)
+            and a.product_sub_code = c.plan(+)
+            and a.product_code = d.product_code(+)
+            and a.produk = '16'
+            and a.no_kartu like '%' || #{no_kartu}
+    </select>
+    
+    
+    
 </mapper>

@@ -28,6 +28,13 @@
         <mapper resource="com/app/xml/bsim/select.xml" />
         <mapper resource="com/app/xml/bsim/insert.xml" />
         <mapper resource="com/app/xml/bsim/update.xml" />
+        <mapper resource="com/app/xml/bsim/delete.xml" />
+        
+        
+        <mapper resource="com/app/xml/common/select.xml" />
+       
+        
+        
  </mappers>
  
  

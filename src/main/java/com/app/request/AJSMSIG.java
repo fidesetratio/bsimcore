@@ -24,6 +24,13 @@ public class AJSMSIG {
 	private String cust_postal_code;
 	private String benef_name;
 	private String benef_dob;
+	// tambahan aja nih
+	private String product_code;
+	private String sub_product_code;
+	private String lscb_id;
+	private String up;
+	private String msag_id;
+	
 	
 	public AJSMSIG(){
 	}
@@ -176,6 +183,56 @@ public class AJSMSIG {
 				+ ", cust_city=" + cust_city + ", cust_postal_code="
 				+ cust_postal_code + ", benef_name=" + benef_name
 				+ ", benef_dob=" + benef_dob + "]";
+	}
+
+
+	public String getProduct_code() {
+		return product_code;
+	}
+
+
+	public void setProduct_code(String product_code) {
+		this.product_code = product_code;
+	}
+
+
+	public String getSub_product_code() {
+		return sub_product_code;
+	}
+
+
+	public void setSub_product_code(String sub_product_code) {
+		this.sub_product_code = sub_product_code;
+	}
+
+
+	public String getLscb_id() {
+		return lscb_id;
+	}
+
+
+	public void setLscb_id(String lscb_id) {
+		this.lscb_id = lscb_id;
+	}
+
+
+	public String getUp() {
+		return up;
+	}
+
+
+	public void setUp(String up) {
+		this.up = up;
+	}
+
+
+	public String getMsag_id() {
+		return msag_id;
+	}
+
+
+	public void setMsag_id(String msag_id) {
+		this.msag_id = msag_id;
 	}
 	
 	

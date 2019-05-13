@@ -36,12 +36,24 @@ public class BsimService {
 		BsimDao dao=sqlSession.getMapper(BsimDao.class);
 		return (HashMap<String,Object>)dao.selectMstKartuPas(premi);
 	}
-	 public Date selectSysdate() throws DataAccessException {
+	
+	public Map<String, Object> selectBankPusat(String lsbp_id){
 			BsimDao dao=sqlSession.getMapper(BsimDao.class);
-			return (Date)dao.selectSysdate();
+			return (HashMap<String,Object>)dao.selectBankPusat(lsbp_id);
 	}
+	
+	public Date selectSysdate(){
+		BsimDao dao=sqlSession.getMapper(BsimDao.class);
+		return dao.selectSysdate();
+}
+	
+	public String selectBsimNoVaSyariah(){
+		BsimDao dao=sqlSession.getMapper(BsimDao.class);
+		return dao.selectBsimNoVaSyariah();
+}
 	 
-	 public String insert(Pas pas) throws Exception{
+	 
+	 public Pas insert(Pas pas) throws Exception{
 		BsimDao dao=sqlSession.getMapper(BsimDao.class);
 		TransactionDefinition txDef = new DefaultTransactionDefinition();
         TransactionStatus txStatus = transactionManager.getTransaction(txDef);
@@ -80,11 +92,18 @@ public class BsimService {
     			dao.insertPas(pas);   
     		
     		//update mst_kartu_pas 
-	    		Map paramsukp = new HashMap();
-	    		paramsukp.put("no_kartu", pas.getNo_kartu());
-	    		paramsukp.put("flag_active", 1);    	
-	    		paramsukp.put("tgl_active", 1); 
-	    		dao.updateKartuPas(paramsukp);
+    			
+    			if(pas.getNo_kartu() != null){
+    				if(!pas.getNo_kartu().trim().equals("")){
+    					Map paramsukp = new HashMap();
+    		    		paramsukp.put("no_kartu", pas.getNo_kartu());
+    		    		paramsukp.put("flag_active", 1);    	
+    		    		paramsukp.put("tgl_active", 1); 
+    		    		dao.updateKartuPas(paramsukp);
+    				}
+    					
+    			}
+	    		
 	    		
 	    		//input mst_position_spaj_pas
 	    		Map paramimpsp = new HashMap();
@@ -99,7 +118,7 @@ public class BsimService {
             transactionManager.rollback(txStatus);
             throw e;
         }
-        return status;
+        return pas;
 	}
 	
 
@@ -115,7 +134,6 @@ public class BsimService {
 	      return counter;
 	    }
 	  public String selectGetCounterMonthYear(Integer aplikasi, String cabang) throws DataAccessException {
-			
 		  BsimDao dao=sqlSession.getMapper(BsimDao.class);
 		  String counter = null;
 	      Map params = new HashMap();
@@ -171,5 +189,20 @@ public class BsimService {
 	    		}
 	    		dao.updateCounterMonthYear(params);
 	    }
+	  
+	  
+		public void update_no_va(String no_va, String no_temp)  throws Exception
+		{	
+			BsimDao dao=sqlSession.getMapper(BsimDao.class);
+			Map param = new HashMap();
+			param.put("spaj_temp", no_temp);
+			param.put("no_va", no_va);
+			dao.updateVa(param);
+		}
 	    
+		
+		
+		
+		
+		
 }

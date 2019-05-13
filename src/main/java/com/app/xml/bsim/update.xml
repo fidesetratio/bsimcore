@@ -21,4 +21,11 @@
 		<if test="tgl_active == 0">, tgl_active = null</if>	
 		where no_kartu = trim(#{no_kartu:VARCHAR})  		 
     </update>
+    
+    <update id="updateVa"  parameterType="java.util.HashMap">
+		    update eka.mst_det_va set spaj_temp=#{spaj_temp,jdbcType=VARCHAR} where no_va = #{no_va,jdbcType=VARCHAR}
+	</update>
+	
+	
+	
 </mapper>

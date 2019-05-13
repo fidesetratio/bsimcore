@@ -11,7 +11,7 @@
 			msp_fire_insured_addr_envir, msp_fire_date_of_birth, msp_no_rekening, msp_no_rekening_autodebet, msag_id, msp_age, lus_id, mspo_policy_no, reg_spaj, msp_fire_insured_city, msp_fire_insured_phone_number, msp_pas_phone_number, msp_fire_okupasi_else, msp_fire_ins_addr_envir_else, lscb_id, msp_flag_aksep, msp_flag_pas, msp_fire_create_date, msp_pas_create_date, msp_fire_jenis, pribadi, msag_id_pp, msp_exist_bp,
 			msp_warga, msp_warga_else, msp_status_nikah, msp_agama, msp_pendidikan, msp_pendidikan_else, msp_occupation, msp_occupation_else, msp_company_name, msp_company_usaha,
 			msp_company_jabatan, msp_company_address, msp_company_postal_code, msp_company_phone_number, msp_cek_ktp, msp_cek_srt_keterangan, msp_cek_kk, msp_cek_npwp, msp_cek_bukti_bayar, msp_cek_rekening, msp_cek_ktp_uw, msp_cek_srt_keterangan_uw, msp_cek_kk_uw, msp_cek_npwp_uw, msp_cek_bukti_bayar_uw, msp_cek_rekening_uw, lsag_id, msp_exist_bp_name, msp_area_code_rumah, lside_id, msp_company_area_code, lrb_id, msp_admin_date, mspo_plan_provider, jenis_pas, msp_up, msp_premi, flag_val_send,msp_cek_akte_kelahiran,msp_cek_akte_kelahiran_uw, msp_cek_tandatangan, msp_cek_tandatangan_uw,
-			product_code, mcl_id_pp, mcl_id_tt, msp_still_bp, msp_partner_exist_bp, msp_partner_still_bp, lju_id, application_id, reff_id, lcb_no, lcb_reff)
+			product_code, mcl_id_pp, mcl_id_tt, msp_still_bp, msp_partner_exist_bp, msp_partner_still_bp, lju_id, application_id, reff_id, lcb_no, lcb_reff,no_va)
 		VALUES(
 			upper(trim(#{msp_kode_sts_sms,jdbcType=VARCHAR})), 
 			upper(trim(#{msp_desc_sts_sms,jdbcType=VARCHAR})), 
@@ -152,11 +152,10 @@
 			#{application_id,jdbcType=VARCHAR}, 
 			#{reff_id,jdbcType=INTEGER}, 
 			#{lcb_no,jdbcType=INTEGER}, 
-			#{lcb_reff,jdbcType=INTEGER} 
+			#{lcb_reff,jdbcType=INTEGER},
+			#{no_va,jdbcType=VARCHAR}
 			)
-		<selectKey keyProperty="msp_id" resultType="string" order="AFTER">
-		  select msp_id from eka.mst_pas_sms where no_kartu = #{no_kartu,jdbcType=VARCHAR}
-		</selectKey>
+	
 	</insert>
 	<insert id="insertMstPositionSpajPas" parameterType="java.util.HashMap">
     	INSERT INTO eka.mst_position_spaj_pas (reg_id, msps_date, lspd_id, lssp_id, lus_id, msps_desc)

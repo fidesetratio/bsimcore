@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace='com.app.dao.CommonDao'>
+
+	<resultMap id="selectAgenPenutup1" type="java.util.HashMap">
+        <result property="ID" column="ID" javaType="string" jdbcType="CHAR"/>
+        <result property="NAMA" column="NAMA" javaType="string" jdbcType="VARCHAR"/>
+        <result property="MSPE_EMAIL" column="MSPE_EMAIL" javaType="string" jdbcType="VARCHAR"/>
+        <result property="REGION" column="REGION" javaType="string" jdbcType="VARCHAR"/>
+        <result property="REGIONID" column="REGIONID" javaType="string" jdbcType="CHAR"/>
+        <result property="ULINK" column="ULINK" javaType="int" jdbcType="INTEGER"/>
+        <result property="SERTIFIKAT" column="SERTIFIKAT" javaType="int" jdbcType="INTEGER"/>
+        <result property="LCAID" column="LCAID" javaType="string" jdbcType="CHAR"/>
+        <result property="BERLAKU" column="BERLAKU" javaType="date" jdbcType="DATE" />
+        <result property="MSAG_ASNEW" column="MSAG_ASNEW" javaType="int" jdbcType="INTEGER"/>
+        <result property="FLAG_CABANG_SYARIAH" column="FLAG_CABANG_SYARIAH" javaType="int" jdbcType="INTEGER"/>
+        <result property="FLAG_AGEN_SYARIAH" column="FLAG_AGEN_SYARIAH" javaType="int" jdbcType="INTEGER"/>
+    </resultMap>
+ 
+ 
+ 	<select id="selectkodegutri" parameterType="java.util.HashMap" resultType="java.lang.String">
+        select mcl_id 
+        from eka.mst_client_new
+        where mcl_first like '%' || trim(upper(#{nama:VARCHAR})) ||'%'  and
+        not(substr(mcl_id,0,2) in('WW','XX')) and
+        to_char(mspe_date_birth,'YYYYMMDD') = #{tgl:VARCHAR}
+    </select>
+    
+    
+    <!-- Select nama region agen-->
+    <select id="selectRegionalAgen" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+        SELECT EKA.MST_AGENT.LCA_ID "STRBRANCH", 
+        EKA.MST_AGENT.LWK_ID "STRWILAYAH", 
+        EKA.MST_AGENT.LSRG_ID "STRREGION", 
+        EKA.MST_AGENT.LCA_ID || EKA.MST_AGENT.LWK_ID "STRAGENTBRANCH"
+        FROM EKA.MST_AGENT
+        WHERE EKA.MST_AGENT.MSAG_ID = #{kodeagen:VARCHAR}
+    </select> 
+       <select id="selectSeqNoSpaj" resultType="string" parameterType="string">        
+        select EKA.PAC_COUNTER.GET_NO_SPAJ_SEQ ( #{lca_id} ) from DUAL
+    </select>
+    
+        <select id="selectSequenceClientID" resultType="string">         
+        SELECT EKA.PAC_COUNTER.GET_CLIENT_ID () FROM DUAL   
+    </select>
+      
+      <select id="selectAgenPenutup" resultMap="selectAgenPenutup1" parameterType="string">
+           SELECT A.MSAG_ID "ID", B.MCL_FIRST "NAMA",B.MSPE_EMAIL,
+              C.LSRG_NAMA "REGION", 
+              A.LCA_ID || A.LWK_ID || A.LSRG_ID "REGIONID" ,
+              A.MSAG_ULINK "ULINK",
+              A.MSAG_SERTIFIKAT "SERTIFIKAT",
+              A.LCA_ID "LCAID",
+              A.MSAG_BERLAKU "BERLAKU",
+              A.MSAG_ASNEW,
+              NVL (D.SYARIAH,0) "FLAG_CABANG_SYARIAH",
+              NVL (A.MSAG_SERTIFIKAT_FLAG,0) "FLAG_AGEN_SYARIAH"
+         FROM EKA.MST_AGENT A, 
+              EKA.mst_client_new B, 
+              EKA.LST_REGION C,
+              EKA.LST_WAKIL D 
+        WHERE A.MCL_ID = B.MCL_ID 
+          AND ( A.LCA_ID = C.LCA_ID AND  A.LWK_ID = C.LWK_ID AND A.LSRG_ID = C.LSRG_ID AND A.LCA_ID = D.lCA_ID AND  A.LWK_ID = D.LWK_ID ) 
+          AND ( LSTB_ID = 1 
+          AND A.MSAG_ACTIVE = 1 and
+          A.MSAG_ID=#{msag_id})
+        ORDER BY LCAID,REGIONID,ID
+    </select>
+      
+</mapper>
