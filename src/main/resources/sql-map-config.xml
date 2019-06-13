@@ -32,7 +32,9 @@
         
         
         <mapper resource="com/app/xml/common/select.xml" />
-       
+        <mapper resource="com/app/xml/common/insert.xml" />
+        <mapper resource="com/app/xml/common/update.xml" />        
+        <mapper resource="com/app/xml/common/delete.xml" />
         
         
  </mappers>

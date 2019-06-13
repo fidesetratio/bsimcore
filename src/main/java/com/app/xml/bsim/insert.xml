@@ -164,4 +164,11 @@
 		    WHERE a.msp_fire_id = upper(trim(#{reg_id,jdbcType=VARCHAR}))
 		      AND ROWNUM = 1
     </insert>
+    
+        <insert id="insertMstStsClient" parameterType="java.util.HashMap">
+        INSERT INTO EKA.MST_STS_CLIENT
+               ( MCL_ID, LJC_ID, MSC_TGL_STS, MSC_ACTIVE )
+        VALUES ( #{mcl_id:VARCHAR}, #{ljc_id:INTEGER}, sysdate, #{msc_active:INTEGER} ) 
+    </insert>
+    
 </mapper>

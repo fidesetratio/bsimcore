@@ -1,0 +1,671 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace='com.app.dao.CommonDao'>
+	
+	
+	 <insert id="insertMstPolicyPasAutodebet" parameterType="java.util.HashMap">
+        INSERT INTO EKA.MST_POLICY (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+             REG_SPAJ, LSTB_ID, LCA_ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+            , LWK_ID, LSRG_ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+            , LSSP_ID , LSPD_ID, MSPO_POLICY_HOLDER                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+            , LSRE_ID , MSPO_AGE , LKU_ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+            , LSCB_ID, LUS_ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+            , MSPO_INS_PERIOD, MSPO_PAY_PERIOD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+            , MSPO_PROSES_BILL,  MSPO_INSTALLMENT , MSPO_REF_BII                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+            , MSPO_DATE_PRINT, MSPO_DATE_SPEC , MSPO_DATE_TTP                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+            , MSPO_PRIBADI, MSPO_AO, MSPO_CUSTOMER                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+            , MSPO_NO_BLANKO ,MSPO_UMUR_BEASISWA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+            , MSPO_FOLLOW_UP, MSPO_KOMISI_BII , MSPO_INPUT_DATE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+            , MSPO_PROVIDER , LSTP_ID ,MSPO_JENIS_TERBIT  ,MSPO_NASABAH_DCIF, MSPO_FLAT, MSPO_NASABAH_ACC, MSPO_JOINT_POLICY, MSPO_LEADER
+            , MSPO_SPAJ_DATE, MSPO_BEG_DATE, MSPO_END_DATE , MSPO_SYAHRIAH, APPLICATION_ID_DMTM,  CF_JOB_CODE, CF_CUSTOMER_ID, CF_CAMPAIGN_CODE, MSPO_NO_KERJASAMA                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+        ) values (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+             upper(#{datausulan.reg_spaj:VARCHAR}),  1,  upper(#{agen.lca_id:VARCHAR})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+            ,  upper(#{agen.lwk_id:VARCHAR}),  upper(#{agen.lsrg_id:VARCHAR})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+            ,  10,  118,  upper(#{pemegang.mspo_policy_holder:VARCHAR})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+            ,  (#{pemegang.lsre_id:INTEGER}),  (#{pemegang.mspo_age:INTEGER}),  upper(#{datausulan.lku_id:VARCHAR})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+            ,  (#{datausulan.lscb_id:INTEGER}),  (#{datausulan.lus_id:INTEGER})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+            ,  (#{datausulan.mspo_ins_period:INTEGER}),  (#{datausulan.mspo_pay_period:INTEGER})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+            ,  0,  (#{datausulan.mspo_installment:INTEGER}),  (#{pemegang.mspo_ref_bii:INTEGER})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+            ,  (#{datausulan.mspo_date_print:DATE}),  (#{datausulan.mspo_date_spec:DATE}),  (#{datausulan.mspo_date_ttp:DATE})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+            ,  (#{pemegang.mspo_pribadi:INTEGER}),  upper(#{pemegang.mspo_ao:VARCHAR}),  upper(#{pemegang.mspo_customer:VARCHAR})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+            ,  upper(#{pemegang.mspo_no_blanko:VARCHAR}) ,(#{tertanggung.mspo_umur_beasiswa:INTEGER})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+            ,  (#{pemegang.mspo_follow_up:INTEGER}),  (#{pemegang.mspo_komisi_bii:INTEGER}), SYSDATE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+            ,  (#{datausulan.mspo_provider:INTEGER}) ,  (#{datausulan.lstp_id:INTEGER})  , 1, #{pemegang.mspo_nasabah_dcif:VARCHAR}, #{pemegang.mspo_flat:INTEGER}, #{datausulan.mspo_nasabah_acc:VARCHAR}, #{datausulan.kopiSPAJ:VARCHAR}, #{pemegang.mspo_leader:VARCHAR} 
+            , SYSDATE, (#{datausulan.mspo_beg_date:DATE}), (#{datausulan.mspo_end_date:DATE}) , (#{datausulan.mspo_syahriah:INTEGER}), (#{pemegang.application_id:VARCHAR}), (#{pemegang.cf_job_code:VARCHAR}), (#{pemegang.cf_customer_id:VARCHAR}), (#{pemegang.cf_campaign_code:VARCHAR}), (#{pemegang.mspo_no_kerjasama:VARCHAR})                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+        )    
+        
+    </insert>
+    
+    <insert id="insertMstPolicyPas" parameterType="java.util.HashMap">
+        INSERT INTO EKA.MST_POLICY (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+             REG_SPAJ, LSTB_ID, LCA_ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+            , LWK_ID, LSRG_ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+            , LSSP_ID , LSPD_ID, MSPO_POLICY_HOLDER                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+            , LSRE_ID , MSPO_AGE , LKU_ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+            , LSCB_ID, LUS_ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+            , MSPO_INS_PERIOD, MSPO_PAY_PERIOD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+            , MSPO_PROSES_BILL,  MSPO_INSTALLMENT , MSPO_REF_BII                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+            , MSPO_DATE_PRINT, MSPO_DATE_SPEC , MSPO_DATE_TTP                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+            , MSPO_PRIBADI, MSPO_AO, MSPO_CUSTOMER                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+            , MSPO_NO_BLANKO ,MSPO_UMUR_BEASISWA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+            , MSPO_FOLLOW_UP, MSPO_KOMISI_BII , MSPO_INPUT_DATE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+            , MSPO_PROVIDER , LSTP_ID ,MSPO_JENIS_TERBIT  ,MSPO_NASABAH_DCIF, MSPO_FLAT, MSPO_NASABAH_ACC, MSPO_JOINT_POLICY, MSPO_LEADER
+            , MSPO_SPAJ_DATE, MSPO_BEG_DATE, MSPO_END_DATE , MSPO_SYAHRIAH, APPLICATION_ID_DMTM,  CF_JOB_CODE, CF_CUSTOMER_ID, CF_CAMPAIGN_CODE, MSPO_NO_KERJASAMA, MSPO_SPV_DMTM                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+        ) values (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+             upper(#{datausulan.reg_spaj:VARCHAR}),  1,  upper(#{agen.lca_id:VARCHAR})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+            ,  upper(#{agen.lwk_id:VARCHAR}),  upper(#{agen.lsrg_id:VARCHAR})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+            ,  10,  4,  upper(#{pemegang.mspo_policy_holder:VARCHAR})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+            ,  (#{pemegang.lsre_id:INTEGER}),  (#{pemegang.mspo_age:INTEGER}),  upper(#{datausulan.lku_id:VARCHAR})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+            ,  (#{datausulan.lscb_id:INTEGER}),  (#{datausulan.lus_id:INTEGER})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+            ,  (#{datausulan.mspo_ins_period:INTEGER}),  (#{datausulan.mspo_pay_period:INTEGER})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+            ,  0,  (#{datausulan.mspo_installment:INTEGER}),  (#{pemegang.mspo_ref_bii:INTEGER})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+            ,  (#{datausulan.mspo_date_print:DATE}),  (#{datausulan.mspo_date_spec:DATE}),  (#{datausulan.mspo_date_ttp:DATE})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+            ,  (#{pemegang.mspo_pribadi:INTEGER}),  upper(#{pemegang.mspo_ao:VARCHAR}),  upper(#{pemegang.mspo_customer:VARCHAR})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+            ,  upper(#{pemegang.mspo_no_blanko:VARCHAR}) ,(#{tertanggung.mspo_umur_beasiswa:INTEGER})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+            ,  (#{pemegang.mspo_follow_up:INTEGER}),  (#{pemegang.mspo_komisi_bii:INTEGER}), SYSDATE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+            ,  (#{datausulan.mspo_provider:INTEGER}) ,  (#{datausulan.lstp_id:INTEGER})  , 1, #{pemegang.mspo_nasabah_dcif:VARCHAR}, #{pemegang.mspo_flat:INTEGER}, #{datausulan.mspo_nasabah_acc:VARCHAR}, #{datausulan.kopiSPAJ:VARCHAR}, #{pemegang.mspo_leader:VARCHAR} 
+            , SYSDATE, (#{datausulan.mspo_beg_date:DATE}), (#{datausulan.mspo_end_date:DATE}) , (#{datausulan.mspo_syahriah:INTEGER}), (#{pemegang.application_id:VARCHAR}), (#{pemegang.cf_job_code:VARCHAR}), (#{pemegang.cf_customer_id:VARCHAR}), (#{pemegang.cf_campaign_code:VARCHAR}), (#{pemegang.mspo_no_kerjasama:VARCHAR}), (#{pemegang.spv:VARCHAR})                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+        )    
+        
+    </insert>
+    
+    <insert id="insertMstInsuredPas" parameterType="java.util.HashMap">
+        INSERT INTO EKA.MST_INSURED (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+            REG_SPAJ, MSTE_INSURED_NO, MSTE_INSURED                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+            , MSTE_AGE, MSTE_MEDICAL, MSTE_STANDARD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+            , LSPD_ID , LUS_ID, MSTE_FLAG_UW, MSTE_KYC_DATE, MSTE_KYC_LUS_ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+            , MSTE_BEG_DATE, MSTE_END_DATE , MSTE_INPUT_DATE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+            , MSTE_BACKUP, LSSA_ID, MSTE_REAS                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+            , MSTE_ACTIVE, MSTE_DEWASA, MSTE_FLAG_CC, MSTE_TGL_AKSEP,  MSTE_TGL_SPAJ_DOC                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+            , MSTE_TGL_RECUR, MSTE_PCT_DPLK , MSTE_FLAG_EL  ,MSTE_FLAG_INVESTASI,
+            MSTE_FLAG_GUTHRIE, MSTE_SPAJ_ASLI, MSTE_FLAG_REF_TELEMARKET, MSTE_NO_VACC                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+        ) values (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+             upper(#{datausulan.reg_spaj:VARCHAR}),  1,  upper(#{tertanggung.mste_insured:VARCHAR})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+            ,  (#{tertanggung.mste_age:INTEGER}),  (#{datausulan.mste_medical:INTEGER}),  0                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+            ,  4,  (#{pemegang.lus_id:INTEGER}), 0, SYSDATE, (#{pemegang.lus_id:INTEGER})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+            ,  (#{datausulan.mste_beg_date:DATE}),  (#{datausulan.mste_end_date:DATE}),  SYSDATE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+            ,  0,(#{datausulan.lssa_id:INTEGER}),0                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+            ,  1,  (#{pemegang.mste_dewasa:INTEGER}),  (#{datausulan.mste_flag_cc:INTEGER}), SYSDATE, SYSDATE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+            ,  (#{pemegang.mste_tgl_recur:DATE}) ,    (#{pemegang.mste_pct_dplk:NUMERIC})  ,(#{datausulan.mste_flag_el:INTEGER}) ,(#{datausulan.mste_flag_investasi:INTEGER}),
+            (#{pemegang.mste_flag_guthrie:INTEGER}), #{pemegang.mste_spaj_asli:NUMERIC}, #{tertanggung.mste_flag_ref_telemarket:INTEGER}, #{tertanggung.mste_no_vacc:VARCHAR}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+        )          
+    </insert>
+    
+    <insert id="insertMstInsuredPasAutodebet" parameterType="java.util.HashMap">
+        INSERT INTO EKA.MST_INSURED (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+            REG_SPAJ, MSTE_INSURED_NO, MSTE_INSURED                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+            , MSTE_AGE, MSTE_MEDICAL, MSTE_STANDARD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+            , LSPD_ID , LUS_ID, MSTE_FLAG_UW, MSTE_KYC_DATE, MSTE_KYC_LUS_ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+            , MSTE_BEG_DATE, MSTE_END_DATE , MSTE_INPUT_DATE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+            , MSTE_BACKUP, LSSA_ID, MSTE_REAS                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+            , MSTE_ACTIVE, MSTE_DEWASA, MSTE_FLAG_CC, MSTE_TGL_AKSEP,  MSTE_TGL_SPAJ_DOC                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+            , MSTE_TGL_RECUR, MSTE_PCT_DPLK , MSTE_FLAG_EL  ,MSTE_FLAG_INVESTASI,
+            MSTE_FLAG_GUTHRIE, MSTE_SPAJ_ASLI, MSTE_FLAG_REF_TELEMARKET, MSTE_NO_VACC                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+        ) values (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+             upper(#{datausulan.reg_spaj:VARCHAR}),  1,  upper(#{tertanggung.mste_insured:VARCHAR})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+            ,  (#{tertanggung.mste_age:INTEGER}),  (#{datausulan.mste_medical:INTEGER}),  0                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+            ,  118,  (#{pemegang.lus_id:INTEGER}), 0, SYSDATE, (#{pemegang.lus_id:INTEGER})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+            ,  (#{datausulan.mste_beg_date:DATE}),  (#{datausulan.mste_end_date:DATE}),  SYSDATE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+            ,  0,(#{datausulan.lssa_id:INTEGER}),0                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+            ,  1,  (#{pemegang.mste_dewasa:INTEGER}),  (#{datausulan.mste_flag_cc:INTEGER}), SYSDATE, SYSDATE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+            ,  (#{pemegang.mste_tgl_recur:DATE}) ,    (#{pemegang.mste_pct_dplk:NUMERIC})  ,(#{datausulan.mste_flag_el:INTEGER}) ,(#{datausulan.mste_flag_investasi:INTEGER}),
+            (#{pemegang.mste_flag_guthrie:INTEGER}), #{pemegang.mste_spaj_asli:NUMERIC}, #{tertanggung.mste_flag_ref_telemarket:INTEGER}, #{tertanggung.mste_no_vacc:VARCHAR}
+        )          
+    </insert>
+    
+    <!--Insert mst_client_new-->
+    <insert id="insertMstClientNew" parameterType="com.app.model.bsim.Client">
+        insert into eka.mst_client_new( 
+                 mcl_id,
+                 <if test="mcl_jenis != null">mcl_jenis,</if> 
+                 <if test="mcl_blacklist != null">mcl_blacklist,</if>
+                 <if test="mcl_tgl_input != null">mcl_tgl_input,</if>   
+                 <if test="lus_id != null">lus_id,</if> 
+                 <if test="mcl_data_salah != null">mcl_data_salah,</if> 
+                 <if test="mcl_gelar != null">mcl_gelar,</if> 
+                 <if test="lside_id != null">lside_id,</if> 
+                 <if test="mspe_no_identity != null">mspe_no_identity,</if>   
+                 <if test="lsed_id != null">lsed_id,</if> 
+                 <if test="lgj_id != null">lgj_id,</if> 
+                 <if test="ljb_id != null">ljb_id,</if> 
+                 <if test="mpn_job_desc != null">mpn_job_desc,</if> 
+                 <if test="mspe_mother != null">mspe_mother,</if>
+                 <if test="mspe_sex != null">mspe_sex,</if> 
+                 <if test="mspe_place_birth != null">mspe_place_birth,</if> 
+                 <if test="lsag_id != null">lsag_id,</if> 
+                 <if test="mspe_sts_mrt != null">mspe_sts_mrt,</if>   
+                 <if test="lsne_id != null">lsne_id,</if> 
+                 <if test="mspe_lama_kerja != null">mspe_lama_kerja,</if>
+                 <if test="mspe_date_birth != null">mspe_date_birth, </if>
+                 <if test="mspe_email != null">mspe_email,</if>
+                 <if test="mkl_tujuan != null">mkl_tujuan,</if>
+                 <if test="mkl_penghasilan != null">mkl_penghasilan,</if>
+                 <if test="mkl_pendanaan != null">mkl_pendanaan,</if>
+                 <if test="mkl_kerja != null">mkl_kerja,</if>
+                 <if test="mkl_industri != null">mkl_industri,</if>
+                 <if test="mcl_agama != null">mcl_agama,</if>
+                 <if test="mkl_red_flag != null">mkl_red_flag,</if>
+                 mcl_first,
+                 lti_id
+                )
+        values( 
+                 #{mcl_id_new:VARCHAR},
+                 <if test="mcl_jenis != null">#{mcl_jenis:INTEGER},</if> 
+                 <if test="mcl_blacklist != null">#{mcl_blacklist:INTEGER},</if>
+                 <if test="mcl_tgl_input != null">#{mcl_tgl_input:DATE},</if>   
+                 <if test="lus_id != null">#{lus_id:INTEGER},</if> 
+                 <if test="mcl_data_salah != null">#{mcl_data_salah:INTEGER},</if> 
+                 <if test="mcl_gelar != null">#{mcl_gelar:VARCHAR},</if> 
+                 <if test="lside_id != null">#{lside_id:INTEGER},</if> 
+                 <if test="mspe_no_identity != null">#{mspe_no_identity:VARCHAR},</if>   
+                 <if test="lsed_id != null">#{lsed_id:INTEGER},</if> 
+                 <if test="lgj_id != null">#{lgj_id:INTEGER},</if> 
+                 <if test="ljb_id != null">#{ljb_id:INTEGER},</if> 
+                 <if test="mpn_job_desc != null">#{mpn_job_desc:VARCHAR},</if> 
+                 <if test="mspe_mother != null">#{mspe_mother:VARCHAR},</if>
+                 <if test="mspe_sex != null">#{mspe_sex:INTEGER},</if> 
+                 <if test="mspe_place_birth != null">#{mspe_place_birth:VARCHAR},</if> 
+                 <if test="lsag_id != null">#{lsag_id:INTEGER},</if> 
+                 <if test="mspe_sts_mrt != null">#{mspe_sts_mrt:VARCHAR},</if>   
+                 <if test="lsne_id != null">#{lsne_id:INTEGER},</if> 
+                 <if test="mspe_lama_kerja != null">#{mspe_lama_kerja:INTEGER},</if>
+                 <if test="mspe_date_birth != null">#{mspe_date_birth:DATE}, </if>
+                 <if test="mspe_email != null">#{mspe_email:VARCHAR},</if>
+                 <if test="mkl_tujuan != null">#{mkl_tujuan:VARCHAR},</if>
+                 <if test="mkl_penghasilan != null">#{mkl_penghasilan:VARCHAR},</if>
+                 <if test="mkl_pendanaan != null">#{mkl_pendanaan:VARCHAR},</if>
+                 <if test="mkl_smbr_penghasilan != null">#{mkl_smbr_penghasilan:VARCHAR},</if>
+                 <if test="mkl_kerja != null">#{mkl_kerja:VARCHAR},</if>
+                 <if test="mkl_industri != null">#{mkl_industri:VARCHAR},</if>
+                 <if test="mcl_agama != null">#{mcl_agama:VARCHAR},</if>
+                 <if test="mkl_red_flag != null">#{mkl_red_flag:INTEGER},</if>
+                 #{mcl_first:VARCHAR}, #{lti_id:INTEGER}
+             )
+    </insert>
+    
+    <!--Insert mst_Address_new-->
+    <insert id="insertMstAddressNew" parameterType="com.app.model.gadget.prod.AddressNew">
+          insert into eka.mst_address_new  
+                 (mcl_id,
+                   <if test="kd_pos_rumah != null">kd_pos_rumah,</if>
+                   <if test="kota_rumah != null">kota_rumah,</if>
+                   <if test="area_code_rumah != null">area_code_rumah,</if>
+                   <if test="telpon_rumah != null">telpon_rumah,</if>   
+                   <if test="alamat_kantor != null">alamat_kantor,</if>
+                   <if test="kd_pos_kantor != null">kd_pos_kantor,</if>
+                   <if test="kota_kantor != null">kota_kantor,</if>
+                   <if test="area_code_kantor != null">area_code_kantor,</if>   
+                   <if test="telpon_kantor != null">telpon_kantor,</if>
+                   <if test="email != null">email,</if>
+                   <if test="no_hp != null">no_hp,</if>
+                   <if test="no_hp2 != null">no_hp2,</if>
+                   <if test="no_fax != null">no_fax,</if>
+                   <if test="area_code_rumah2 != null">area_code_rumah2,</if>   
+                   <if test="telpon_rumah2 != null">telpon_rumah2,</if>
+                   <if test="area_code_kantor2 != null">area_code_kantor2,</if>
+                   <if test="telpon_kantor2 != null">telpon_kantor2,</if>
+                   <if test="area_code_fax != null">area_code_fax,</if>  
+                   alamat_rumah
+                 )  
+          values ( #{mcl_id_new:VARCHAR},
+                   <if test="kd_pos_rumah != null">#{kd_pos_rumah:VARCHAR},</if>
+                   <if test="kota_rumah != null">#{kota_rumah:VARCHAR},</if>
+                   <if test="area_code_rumah != null">#{area_code_rumah:VARCHAR},</if>
+                   <if test="telpon_rumah != null">#{telpon_rumah:VARCHAR},</if>   
+                   <if test="alamat_kantor != null">#{alamat_kantor:VARCHAR},</if>
+                   <if test="kd_pos_kantor != null">#{kd_pos_kantor:VARCHAR},</if>
+                   <if test="kota_kantor != null">#{kota_kantor:VARCHAR},</if>
+                   <if test="area_code_kantor != null">#{area_code_kantor:VARCHAR},</if>   
+                   <if test="telpon_kantor != null">#{telpon_kantor:VARCHAR},</if>
+                   <if test="email != null">#{email:VARCHAR},</if>
+                   <if test="no_hp != null">#{no_hp:VARCHAR},</if>
+                   <if test="no_hp2 != null">#{no_hp2:VARCHAR},</if>
+                   <if test="no_fax != null">#{no_fax:VARCHAR},</if>
+                   <if test="area_code_rumah2 != null">#{area_code_rumah2:VARCHAR},</if>   
+                   <if test="telpon_rumah2 != null">#{telpon_rumah2:VARCHAR},</if>
+                   <if test="area_code_kantor2 != null">#{area_code_kantor2:VARCHAR},</if>
+                   <if test="telpon_kantor2 != null">#{telpon_kantor2:VARCHAR},</if>
+                   <if test="area_code_fax != null">#{area_code_fax:VARCHAR},</if>   
+                   #{alamat_rumah:VARCHAR}
+                   )
+    </insert>
+    
+    
+    
+    
+    <!-- BSIM -->
+    
+      <insert id="insertPas" parameterType="com.app.model.bsim.Pas">
+		INSERT INTO eka.mst_pas_sms(
+			msp_kode_sts_sms, msp_desc_sts_sms, msp_mobile, msp_mobile2, msp_text, msp_message_date, msp_receive_date, msp_full_name, msp_identity_no, msp_identity_no_tt, msp_date_of_birth, msp_pas_nama_pp, msp_pas_dob_pp, msp_pas_tmp_lhr_pp, msp_pas_email, msp_pas_tmp_lhr_tt, produk, msp_tgl_debet, msp_tgl_valid, kode_ao,
+			msp_address_1, msp_address_2, msp_city, msp_rek_nama, msp_rek_nama_autodebet, msp_rek_kota, msp_rek_cabang, msp_postal_code, dist, pin, no_kartu, lspd_id, lssp_id, lsbp_id, lsbp_id_autodebet, msp_pas_accept_date, msp_pas_beg_date, msp_pas_end_date, msp_fire_accept_date, lsre_id,
+			msp_fire_beg_date, msp_fire_end_date, msp_fire_policy_no, msp_fire_code_name, msp_fire_name, msp_fire_identity, msp_fire_id, msp_fire_occupation, msp_fire_type_business, msp_fire_source_fund, msp_fire_address_1, 
+			msp_fire_phone_number, msp_fire_email, msp_fire_okupasi, msp_fire_postal_code, msp_fire_mobile, msp_fire_insured_addr_code, msp_fire_addr_code, msp_fire_insured_addr, msp_fire_insured_postal_code, msp_fire_insured_addr_no, msp_flag_cc, msp_sex_pp, msp_sex_tt,
+			msp_fire_insured_addr_envir, msp_fire_date_of_birth, msp_no_rekening, msp_no_rekening_autodebet, msag_id, msp_age, lus_id, mspo_policy_no, reg_spaj, msp_fire_insured_city, msp_fire_insured_phone_number, msp_pas_phone_number, msp_fire_okupasi_else, msp_fire_ins_addr_envir_else, lscb_id, msp_flag_aksep, msp_flag_pas, msp_fire_create_date, msp_pas_create_date, msp_fire_jenis, pribadi, msag_id_pp, msp_exist_bp,
+			msp_warga, msp_warga_else, msp_status_nikah, msp_agama, msp_pendidikan, msp_pendidikan_else, msp_occupation, msp_occupation_else, msp_company_name, msp_company_usaha,
+			msp_company_jabatan, msp_company_address, msp_company_postal_code, msp_company_phone_number, msp_cek_ktp, msp_cek_srt_keterangan, msp_cek_kk, msp_cek_npwp, msp_cek_bukti_bayar, msp_cek_rekening, msp_cek_ktp_uw, msp_cek_srt_keterangan_uw, msp_cek_kk_uw, msp_cek_npwp_uw, msp_cek_bukti_bayar_uw, msp_cek_rekening_uw, lsag_id, msp_exist_bp_name, msp_area_code_rumah, lside_id, msp_company_area_code, lrb_id, msp_admin_date, mspo_plan_provider, jenis_pas, msp_up, msp_premi, flag_val_send,msp_cek_akte_kelahiran,msp_cek_akte_kelahiran_uw, msp_cek_tandatangan, msp_cek_tandatangan_uw,
+			product_code, mcl_id_pp, mcl_id_tt, msp_still_bp, msp_partner_exist_bp, msp_partner_still_bp, lju_id, application_id, reff_id, lcb_no, lcb_reff)
+		VALUES(
+			upper(trim(#{msp_kode_sts_sms,jdbcType=VARCHAR})), 
+			upper(trim(#{msp_desc_sts_sms,jdbcType=VARCHAR})), 
+			trim(#{msp_mobile,jdbcType=VARCHAR}), 
+			trim(#{msp_mobile2,jdbcType=VARCHAR}), 
+			upper(trim(#{msp_text,jdbcType=VARCHAR})), 
+			#{msp_message_date,jdbcType=DATE}, 
+			#{msp_receive_date,jdbcType=DATE}, 
+			upper(trim(#{msp_full_name,jdbcType=VARCHAR})), 
+			trim(#{msp_identity_no,jdbcType=VARCHAR}), 
+			trim(#{msp_identity_no_tt,jdbcType=VARCHAR}), 
+			#{msp_date_of_birth,jdbcType=DATE}, 
+			upper(trim(#{msp_pas_nama_pp,jdbcType=VARCHAR})), 
+			#{msp_pas_dob_pp,jdbcType=DATE}, 
+			upper(trim(#{msp_pas_tmp_lhr_pp,jdbcType=VARCHAR})), 
+			upper(trim(#{msp_pas_email,jdbcType=VARCHAR})), 
+			upper(trim(#{msp_pas_tmp_lhr_tt,jdbcType=VARCHAR})), 
+			#{produk,jdbcType=INTEGER}, 
+			#{msp_tgl_debet,jdbcType=DATE}, 
+			#{msp_tgl_valid,jdbcType=DATE}, 
+			upper(trim(#{kode_ao,jdbcType=VARCHAR})),  
+			upper(trim(#{msp_address_1,jdbcType=VARCHAR})), 
+			upper(trim(#{msp_address_2,jdbcType=VARCHAR})), 
+			upper(trim(#{msp_city,jdbcType=VARCHAR})), 
+			upper(trim(#{msp_rek_nama,jdbcType=VARCHAR})), 
+			upper(trim(#{msp_rek_nama_autodebet,jdbcType=VARCHAR})), 
+			upper(trim(#{msp_rek_kota,jdbcType=VARCHAR})), 
+			upper(trim(#{msp_rek_cabang,jdbcType=VARCHAR})),
+			upper(trim(#{msp_postal_code,jdbcType=VARCHAR})),  
+			#{dist,jdbcType=VARCHAR}, 
+			#{pin,jdbcType=VARCHAR}, 
+			#{no_kartu,jdbcType=VARCHAR}, 
+			#{lspd_id,jdbcType=INTEGER}, 
+			#{lssp_id,jdbcType=INTEGER}, 
+			#{lsbp_id,jdbcType=INTEGER}, 
+			#{lsbp_id_autodebet,jdbcType=INTEGER}, 
+			#{msp_pas_accept_date,jdbcType=DATE}, 
+			#{msp_pas_beg_date,jdbcType=DATE}, 
+			#{msp_pas_end_date,jdbcType=DATE}, 
+			#{msp_fire_accept_date,jdbcType=DATE}, 
+			#{lsre_id,jdbcType=INTEGER},
+			#{msp_fire_beg_date,jdbcType=DATE}, 
+			#{msp_fire_end_date,jdbcType=DATE}, 
+			#{msp_fire_policy_no,jdbcType=VARCHAR}, 
+			upper(trim(#{msp_fire_code_name,jdbcType=VARCHAR})), 
+			upper(trim(#{msp_fire_name,jdbcType=VARCHAR})), 
+			upper(trim(#{msp_fire_identity,jdbcType=VARCHAR})),
+			#{msp_fire_id,jdbcType=VARCHAR},  
+			upper(trim(#{msp_fire_occupation,jdbcType=VARCHAR})), 
+			upper(trim(#{msp_fire_type_business,jdbcType=VARCHAR})), 
+			upper(trim(#{msp_fire_source_fund,jdbcType=VARCHAR})), 
+			upper(trim(#{msp_fire_address_1,jdbcType=VARCHAR})), 
+			trim(#{msp_fire_phone_number,jdbcType=VARCHAR}), 
+			upper(trim(#{msp_fire_email,jdbcType=VARCHAR})), 
+			upper(trim( #{msp_fire_okupasi,jdbcType=VARCHAR})),
+			trim(#{msp_fire_postal_code,jdbcType=VARCHAR}),  
+			trim(#{msp_fire_mobile,jdbcType=VARCHAR}), 
+			upper(trim(#{msp_fire_insured_addr_code,jdbcType=VARCHAR})), 
+			upper(trim(#{msp_fire_addr_code,jdbcType=VARCHAR})), 
+			upper(trim(#{msp_fire_insured_addr,jdbcType=VARCHAR})), 
+			trim(#{msp_fire_insured_postal_code,jdbcType=VARCHAR}), 
+			upper(trim(#{msp_fire_insured_addr_no,jdbcType=VARCHAR})),
+			#{msp_flag_cc,jdbcType=INTEGER}, 
+			#{msp_sex_pp,jdbcType=INTEGER}, 
+			#{msp_sex_tt,jdbcType=INTEGER},  
+			upper(trim(#{msp_fire_insured_addr_envir,jdbcType=VARCHAR})), 
+			#{msp_fire_date_of_birth,jdbcType=DATE}, 
+			#{msp_no_rekening,jdbcType=VARCHAR}, 
+			#{msp_no_rekening_autodebet,jdbcType=VARCHAR}, 
+			#{msag_id,jdbcType=VARCHAR}, 
+			#{msp_age,jdbcType=INTEGER}, 
+			#{lus_id,jdbcType=INTEGER}, 
+			#{mspo_policy_no,jdbcType=VARCHAR}, 
+			#{reg_spaj,jdbcType=VARCHAR}, 
+			upper(trim(#{msp_fire_insured_city,jdbcType=VARCHAR})), 
+			trim(#{msp_fire_insured_phone_number,jdbcType=VARCHAR}), 
+			trim(#{msp_pas_phone_number,jdbcType=VARCHAR}), 
+			upper(trim(#{msp_fire_okupasi_else,jdbcType=VARCHAR})), 
+			upper(trim(#{msp_fire_ins_addr_envir_else,jdbcType=VARCHAR})), 
+			#{lscb_id,jdbcType=INTEGER}, 
+			0, 
+			#{msp_flag_pas,jdbcType=INTEGER}, 
+			#{msp_fire_create_date,jdbcType=DATE}, 
+			#{msp_pas_create_date,jdbcType=DATE}, 
+			0, 
+			#{pribadi,jdbcType=INTEGER}, 
+			#{msag_id_pp,jdbcType=VARCHAR}, 
+			#{msp_exist_bp,jdbcType=INTEGER}, 
+			#{msp_warga,jdbcType=INTEGER}, 
+			upper(trim(#{msp_warga_else,jdbcType=VARCHAR})), 
+			#{msp_status_nikah,jdbcType=INTEGER},
+			#{msp_agama,jdbcType=VARCHAR}, 
+			#{msp_pendidikan,jdbcType=INTEGER}, 
+			upper(trim(#{msp_pendidikan_else,jdbcType=VARCHAR})), 
+			#{msp_occupation,jdbcType=VARCHAR}, 
+			upper(trim(#{msp_occupation_else,jdbcType=VARCHAR})), 
+			upper(trim(#{msp_company_name,jdbcType=VARCHAR})), 
+			#{msp_company_usaha,jdbcType=INTEGER}, 
+			upper(trim( #{msp_company_jabatan,jdbcType=VARCHAR})),
+			upper(trim(#{msp_company_address,jdbcType=VARCHAR})),  
+			upper(trim(#{msp_company_postal_code,jdbcType=VARCHAR})), 
+			#{msp_company_phone_number,jdbcType=VARCHAR}, 
+			#{msp_cek_ktp,jdbcType=INTEGER}, 
+			#{msp_cek_srt_keterangan,jdbcType=INTEGER}, 
+			#{msp_cek_kk,jdbcType=INTEGER}, 
+			#{msp_cek_npwp,jdbcType=INTEGER}, 
+			#{msp_cek_bukti_bayar,jdbcType=INTEGER}, 
+			#{msp_cek_rekening,jdbcType=INTEGER}, 
+			#{msp_cek_ktp_uw,jdbcType=INTEGER}, 
+			#{msp_cek_srt_keterangan_uw,jdbcType=INTEGER}, 
+			#{msp_cek_kk_uw,jdbcType=INTEGER}, 
+			#{msp_cek_npwp_uw,jdbcType=INTEGER}, 
+			#{msp_cek_bukti_bayar_uw,jdbcType=INTEGER}, 
+			#{msp_cek_rekening_uw,jdbcType=INTEGER}, 
+			#{lsag_id,jdbcType=INTEGER}, 
+			upper(trim(#{msp_exist_bp_name,jdbcType=VARCHAR})), 
+			#{msp_area_code_rumah,jdbcType=VARCHAR}, 
+			#{lside_id,jdbcType=INTEGER}, 
+			#{msp_company_area_code,jdbcType=VARCHAR}, 
+			#{lrb_id,jdbcType=INTEGER}, 
+			#{msp_admin_date,jdbcType=DATE}, 
+			#{mspo_plan_provider,jdbcType=VARCHAR}, 
+			#{jenis_pas,jdbcType=VARCHAR}, 
+			#{msp_up,jdbcType=VARCHAR}, 
+			#{msp_premi,jdbcType=VARCHAR}, 
+			1,
+			#{msp_cek_akte_kelahiran,jdbcType=INTEGER},
+			#{msp_cek_akte_kelahiran_uw,jdbcType=INTEGER}, 
+			#{msp_cek_tandatangan,jdbcType=INTEGER}, 
+			#{msp_cek_tandatangan_uw,jdbcType=INTEGER}, 
+			#{product_code,jdbcType=VARCHAR}, 
+			#{mcl_id_pp,jdbcType=VARCHAR}, 
+			#{mcl_id_tt,jdbcType=VARCHAR}, 
+			#{msp_still_bp,jdbcType=INTEGER}, 
+			#{msp_partner_exist_bp,jdbcType=INTEGER}, 
+			#{msp_partner_still_bp,jdbcType=INTEGER}, 
+			#{lju_id,jdbcType=INTEGER}, 
+			#{application_id,jdbcType=VARCHAR}, 
+			#{reff_id,jdbcType=INTEGER}, 
+			#{lcb_no,jdbcType=INTEGER}, 
+			#{lcb_reff,jdbcType=INTEGER} 
+			)
+		<selectKey keyProperty="msp_id" resultType="string" order="AFTER">
+		  select msp_id from eka.mst_pas_sms where no_kartu = #{no_kartu,jdbcType=VARCHAR}
+		</selectKey>
+	</insert>
+	
+	<insert id="insertMstPositionSpajPas" parameterType="java.util.HashMap">
+    	INSERT INTO eka.mst_position_spaj_pas (reg_id, msps_date, lspd_id, lssp_id, lus_id, msps_desc)
+		   SELECT a.msp_fire_id, SYSDATE + (#{addSecond,jdbcType=INTEGER} * (1/115200)), a.lspd_id, a.lssp_id, upper(trim(#{lus_id,jdbcType=VARCHAR})), upper(trim(#{msps_desc,jdbcType=VARCHAR}))
+		     FROM eka.mst_pas_sms a 
+		    WHERE a.msp_fire_id = upper(trim(#{reg_id,jdbcType=VARCHAR}))
+		      AND ROWNUM = 1
+    </insert>
+    
+    <insert id="insertMstStsClient" parameterType="java.util.HashMap">
+        INSERT INTO EKA.MST_STS_CLIENT
+               ( MCL_ID, LJC_ID, MSC_TGL_STS, MSC_ACTIVE )
+        VALUES ( #{mcl_id:VARCHAR}, #{ljc_id:INTEGER}, sysdate, #{msc_active:INTEGER} ) 
+    </insert>
+    
+    <!--Insert mst_simultaneous (tambahan proses simultan baru (id_simultan) khusus individu-->
+    <insert id="insertMstSimultaneous" parameterType="java.util.HashMap">
+        INSERT INTO EKA.MST_SIMULTANEOUS  
+         ( MCL_ID, MSSM_NUMBER, REG_SPAJ, MSTE_INSURED_NO, MSSM_PEMEGANG ,ID_SIMULTAN) 
+         VALUES ( #{s_client:VARCHAR}, #{l_simultan_no:INTEGER}, #{txtnospaj:VARCHAR}, #{mste_insured_no:INTEGER}, #{j:INTEGER},#{id_simultan:VARCHAR} )  
+    </insert>
+    
+    <!--Insert m_sar_temp-->
+    <insert id="insertMSarTemp" parameterType="java.util.HashMap">
+        INSERT INTO EKA.M_SAR_TEMP   
+                   ( REG_SPAJ, 
+                   <if test="reg_spaj_ref != null and reg_spaj_ref != ''">reg_spaj_ref,</if>
+                   <if test="li_cnt != null and li_cnt != ''">CNT,</if>
+                   <if test="ls_polis != null and ls_polis != ''">NO_POLIS,</if>
+                     BISNIS_ID, 
+                     BISNIS_NO, 
+                     KURS_ID, 
+                     SAR, 
+                     STS_POLIS, 
+                     MEDIS) 
+                     VALUES (#{txtnospaj:VARCHAR},
+                   <if test="reg_spaj_ref != null and reg_spaj_ref != ''">#{reg_spaj_ref:VARCHAR},</if>
+                   <if test="li_cnt != null and li_cnt != ''">#{li_cnt:INTEGER},</if>
+                   <if test="ls_polis != null and ls_polis != ''">#{ls_polis:VARCHAR},</if>
+                   #{li_bisnis_id:INTEGER}, 
+                   #{li_bisnis_no:INTEGER}, 
+                   #{ls_kurs_id:VARCHAR}, 
+                   #{ldec_sar:NUMERIC}, 
+                   #{li_sts_polis:INTEGER}, 
+                   #{li_medis:INTEGER} )
+    </insert>
+    
+    <insert id="insertMReasTemp" parameterType="com.app.model.bsim.ReasTemp">
+        INSERT INTO EKA.M_REAS_TEMP(reg_spaj,pemegang,mste_reas,extra_mortality,lku_id,nil_kurs,
+                    simultan_tr_rd,tsi_tr_rd,sar_tr_rd,retensi_tr_rd,reas_tr_rd,
+                    simultan_life,tsi_life,sar_life,retensi_life,reas_life,
+                    simultan_ssp,tsi_ssp,sar_ssp,retensi_ssp,reas_ssp,
+                    simultan_pa_in,tsi_pa_in,sar_pa_in,retensi_pa_in,reas_pa_in,
+                    simultan_pa_rd,tsi_pa_rd,sar_pa_rd,retensi_pa_rd,reas_pa_rd,
+                    simultan_pk_in,tsi_pk_in,sar_pk_in,retensi_pk_in,reas_pk_in,        
+                    simultan_pk_rd,tsi_pk_rd,sar_pk_rd,retensi_pk_rd,reas_pk_rd,
+                    simultan_ssh,tsi_ssh,sar_ssh,retensi_ssh,reas_ssh,tipe) 
+            VALUES(#{reg_spaj:VARCHAR},#{pemegang:INTEGER},#{mste_reas:INTEGER},#{extra_mortality:NUMERIC},#{lku_id:VARCHAR},#{nil_kurs:NUMERIC},
+                    #{simultan_tr_rd:NUMERIC},#{tsi_tr_rd:NUMERIC},#{sar_tr_rd:NUMERIC},#{retensi_tr_rd:NUMERIC},#{reas_tr_rd:NUMERIC},
+                    #{simultan_life:NUMERIC},#{tsi_life:NUMERIC},#{sar_life:NUMERIC},#{retensi_life:NUMERIC},#{reas_life:NUMERIC},
+                    #{simultan_ssp:NUMERIC},#{tsi_ssp:NUMERIC},#{sar_ssp:NUMERIC},#{retensi_ssp:NUMERIC},#{reas_ssp:NUMERIC},
+                    #{simultan_pa_in:NUMERIC},#{tsi_pa_in:NUMERIC},#{sar_pa_in:NUMERIC},#{retensi_pa_in:NUMERIC},#{reas_pa_in:NUMERIC},
+                    #{simultan_pa_rd:NUMERIC},#{tsi_pa_rd:NUMERIC},#{sar_pa_rd:NUMERIC},#{retensi_pa_rd:NUMERIC},#{reas_pa_rd:NUMERIC},
+                    #{simultan_pk_in:NUMERIC},#{tsi_pk_in:NUMERIC},#{sar_pk_in:NUMERIC},#{retensi_pk_in:NUMERIC},#{reas_pk_in:NUMERIC},          
+                    #{simultan_pk_rd:NUMERIC},#{tsi_pk_rd:NUMERIC},#{sar_pk_rd:NUMERIC},#{retensi_pk_rd:NUMERIC},#{reas_pk_rd:NUMERIC},
+                    #{simultan_ssh:NUMERIC},#{tsi_ssh:NUMERIC},#{sar_ssh:NUMERIC},#{retensi_ssh:NUMERIC},#{reas_ssh:NUMERIC},#{tipe:INTEGER})
+    </insert>
+    
+    <insert id="insertMstBilling" parameterType="java.util.HashMap">
+             INSERT INTO EKA.MST_BILLING  
+                    ( REG_SPAJ, 
+                      MSBI_TAHUN_KE, 
+                      MSBI_PREMI_KE, 
+                      MSBI_BEG_DATE, 
+                      MSBI_END_DATE,   
+                      MSBI_DUE_DATE, 
+                      MSBI_AKTIF_DATE, 
+                      LKU_ID, 
+                      MSBI_POLICY_COST, 
+                      MSBI_HCR_POLICY_COST,   
+                      MSBI_TTL_CARD_COST, 
+                      MSBI_STAMP, 
+                      MSBI_INPUT_DATE, 
+                      MSBI_REMAIN, 
+                      MSBI_PAID, 
+                      MSBI_ACTIVE,
+                      MSBI_PRINT, 
+                      MSBI_ADD_BILL, 
+                      LUS_ID, 
+                      LSPD_ID, 
+                      LCA_ID, 
+                      LWK_ID, 
+                     <if test="msbi_flag_topup != null and msbi_flag_topup != ''">MSBI_FLAG_TOPUP,</if>
+                      LSRG_ID,
+                      MSBI_TH_BAK,
+                      MSBI_PREMI_BAK,
+                      MSBI_PERSEN_PAID, 
+                      MSBI_TGL_DEBET,
+                      MSBI_NB )  
+            VALUES ( #{reg_spaj:VARCHAR}, 
+                     #{msbi_tahun_ke:INTEGER}, 
+                     #{msbi_premi_ke:INTEGER}, 
+                     #{msbi_beg_date:DATE}, 
+                     #{msbi_end_date:DATE}, 
+                     #{msbi_due_date:DATE}, 
+                     #{msbi_aktif_date:DATE}, 
+                     #{lku_id:VARCHAR}, 
+                     #{msbi_policy_cost:NUMERIC}, 
+                     #{msbi_hcr_policy_cost:NUMERIC},
+                     #{msbi_ttl_card_cost:NUMERIC}, 
+                     #{msbi_stamp:NUMERIC}, 
+                     SYSDATE, 
+                     #{msbi_remain:NUMERIC}, 
+                     #{msbi_paid:INTEGER}, 
+                     #{msbi_active:INTEGER},
+                     #{msbi_print:INTEGER}, 
+                     #{msbi_add_bill:INTEGER}, 
+                     #{lus_id:INTEGER}, 
+                     #{lspd_id:INTEGER}, 
+                     #{lca_id:VARCHAR}, 
+                     #{lwk_id:VARCHAR}, 
+                    <if test="msbi_flag_topup != null and msbi_flag_topup != ''">#{msbi_flag_topup:INTEGER},</if>
+                     #{lsrg_id:VARCHAR},
+                     #{msbi_th_bak:INTEGER},
+                     #{msbi_premi_bak:INTEGER},
+                     #{msbi_persen_paid:INTEGER},
+                     #{tgl_debet:DATE},
+                     1 )  
+    </insert>
+    
+    <insert id="insertMstDetBilling" parameterType="java.util.HashMap">
+           INSERT INTO EKA.MST_DET_BILLING  
+            ( SELECT REG_SPAJ, 1, 1, ROWNUM, LSBS_ID,   
+                      LSDBS_NUMBER, MSPR_PREMIUM, MSPR_DISCOUNT  
+              FROM   EKA.MST_PRODUCT_INSURED  
+              WHERE  ( REG_SPAJ = #{reg_spaj} ) AND  
+                        ( MSTE_INSURED_NO = 1 ) AND 
+                        ( MSPR_ACTIVE = 1 )
+            ) 
+    </insert>
+    
+    <!--Insert mst_cnt_polis-->
+     <insert id="insertMstCntPolis" parameterType="java.util.HashMap">
+        INSERT INTO EKA.MST_CNT_POLIS  
+            ( LCA_ID,   LSBS_ID,   MSCNP_VALUE,      MSCNP_MAX )  
+      VALUES ( #{as_cab:VARCHAR}} , #{as_bisnis:INTEGER} , #{ld_no:NUMERIC} , 999999999 )
+     </insert>
+    
+    <!-- common  -->
+    
+    
+	<insert id="insertCommon" parameterType="java.lang.String">
+         ${value}
+    </insert>
+    
+    <insert id="insertMstEmail" parameterType="com.app.model.Email" >
+    	insert into eka.mst_email
+    	(me_id, me_system, me_show_system, me_show_footer,
+    	 me_from, me_from_alias, me_to, me_cc,
+    	 me_bcc, me_subject, me_message, mec_id,
+    	 me_html, me_status, me_status_message, me_count,
+    	 me_lus_id, me_input_date, me_sent_date, priority,
+    	 lje_id)
+    	 values(
+    	 #{me_id,jdbcType=VARCHAR}, #{me_system,jdbcType=VARCHAR}, #{me_show_system,jdbcType=INTEGER}, #{me_show_footer,jdbcType=INTEGER},
+    	 #{me_from,jdbcType=VARCHAR}, #{me_from_alias,jdbcType=VARCHAR}, #{me_to,jdbcType=VARCHAR}, #{me_cc,jdbcType=VARCHAR},
+    	 #{me_bcc,jdbcType=VARCHAR}, #{me_subject,jdbcType=VARCHAR}, #{me_message,jdbcType=VARCHAR}, #{mec_id,jdbcType=INTEGER},
+    	 #{me_html,jdbcType=INTEGER}, #{me_status,jdbcType=INTEGER}, #{me_status_message,jdbcType=VARCHAR}, #{me_count,jdbcType=INTEGER},
+    	 #{me_lus_id,jdbcType=INTEGER}, #{me_input_date,jdbcType=DATE}, #{me_sent_date,jdbcType=DATE}, #{priority,jdbcType=INTEGER},
+    	 #{lje_id,jdbcType=INTEGER}
+    	 )
+    </insert>
+    
+    <insert id="insertAksesHist" parameterType="java.util.HashMap">
+    	insert into eka.mst_akses_hist
+    		(MSAH_JENIS, MSAH_DATE, REQUEST_URL, MSAH_URI, MSAH_IP, REMOTE_ADDR, REMOTE_HOST, JENIS_ID, OTHER_ID, USER_ID, USER_PASS_ENTERED) 
+    	VALUES
+			( #{MSAH_JENIS,jdbcType=INTEGER} , sysdate, #{REQUEST_URL,jdbcType=VARCHAR}, #{MSAH_URI,jdbcType=VARCHAR}, #{MSAH_IP,jdbcType=VARCHAR}, #{REMOTE_ADDR,jdbcType=VARCHAR}, #{REMOTE_HOST,jdbcType=VARCHAR}, #{JENIS_ID,jdbcType=INTEGER}, #{OTHER_ID,jdbcType=INTEGER}, #{USER_ID,jdbcType=VARCHAR}, #{USER_PASS_ENTERED,jdbcType=VARCHAR} )
+	</insert>
+    
+     <insert id="insertLstHistActvWs" parameterType="java.util.HashMap" >
+    	insert into EKA.LST_HIST_ACTIVITY_WS
+    	(CLIENT_ID, PROCESS_ID, PROCESS_DATE, PROCESS_DESC,
+    	 PROCESS_RESULT, METHOD, MSAH_IP, START_DATE,ERR)
+    	 values(#{CLIENT_ID,jdbcType=INTEGER}, #{PROCESS_ID,jdbcType=INTEGER},SYSDATE,
+    	  #{PROCESS_DESC, jdbcType=VARCHAR}, #{PROCESS_RESULT,jdbcType=VARCHAR}, #{METHOD,jdbcType=INTEGER}, 
+    	  #{MSAH_IP,jdbcType=VARCHAR}, #{START_DATE,jdbcType=DATE},#{ERR,jdbcType=VARCHAR}
+    	 )
+    </insert>
+    
+    <insert id="insertLstHistActvWsOut" parameterType="java.util.HashMap" >
+    	insert into EKA.LST_HIST_ACTIVITY_WS_OUT
+		(ID, CLIENT_ID, JENIS_ID, PROCESS_API, PROCESS_DESC, HTTP_STATUS, RESULT, METHOD)
+		VALUES (
+		#{ID,jdbcType=VARCHAR}, #{CLIENT_ID,jdbcType=INTEGER}, #{JENIS_ID,jdbcType=INTEGER}, #{PROCESS_API, jdbcType=VARCHAR},
+		#{PROCESS_DESC, jdbcType=VARCHAR}, 
+		#{HTTP_STATUS,jdbcType=VARCHAR}, #{RESULT,jdbcType=VARCHAR}, #{METHOD,jdbcType=INTEGER}
+		)
+    </insert>
+    
+    <insert id="insertMstUrlSecure" parameterType="java.util.HashMap" >
+    	INSERT INTO eka.mst_url_secure (id_secure_1, id_secure_2, id_encrypt_1, id_encrypt_2, key_id, link, create_date)
+		VALUES (#{sec_1,jdbcType=VARCHAR}, #{sec_2,jdbcType=VARCHAR}, #{encrypt_1,jdbcType=VARCHAR}, #{encrypt_2,jdbcType=VARCHAR}, 
+				#{kode,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR}, SYSDATE)
+    </insert>
+    
+    <insert id="insertSmsserverout" parameterType="com.app.model.sms.Smsserver_out" >
+    	INSERT INTO EKA.SMSSERVER_OUT(                    
+			 TYPE                                             
+			, RECIPIENT                                        
+			, TEXT                                             
+			, WAP_URL                                          
+			, WAP_EXPIRY_DATE                                  
+			, WAP_SIGNAL                                       
+			, CREATE_DATE                                      
+			, ORIGINATOR                                       
+			, ENCODING                                         
+			, STATUS_REPORT                                    
+			, FLASH_SMS                                        
+			, SRC_PORT                                         
+			, DST_PORT                                         
+			, SENT_DATE                                        
+			, REF_NO                                           
+			, PRIORITY                                         
+			, STATUS                                           
+			, ERRORS                                           
+			, GATEWAY_ID
+			, LUS_ID  
+			, ID_REFRENCE    
+			, JENIS        
+			, LJS_ID
+			, MSPO_POLICY_NO
+			, REG_SPAJ                       
+		) values (                                         
+			 upper(#{type,jdbcType=VARCHAR})                            
+			, upper(EKA.UTILS.STANDARD_HP(#{recipient,jdbcType=VARCHAR}))                       
+			, #{text,jdbcType=VARCHAR}                    
+			, upper(#{wap_url,jdbcType=VARCHAR})                         
+			, #{wap_expiry_date,jdbcType=DATE}                              
+			, upper(#{wap_signal,jdbcType=VARCHAR})                      
+			, sysdate                                   
+			, upper(EKA.UTILS.STANDARD_HP(#{originator,jdbcType=VARCHAR}))                      
+			, upper(#{encoding,jdbcType=VARCHAR})                        
+			, #{status_report,jdbcType=INTEGER}                         
+			, #{flash_sms,jdbcType=INTEGER}                            
+			, #{src_port,jdbcType=INTEGER}                              
+			, #{dst_port,jdbcType=INTEGER}                               
+			, #{sent_date,jdbcType=DATE}                                    
+			, upper(#{ref_no,jdbcType=VARCHAR})                          
+			, #{priority,jdbcType=INTEGER}                               
+			, 'U'                          
+			, #{errors,jdbcType=INTEGER}                                
+			, EKA.UTILS.SMS_GATEWAY(#{recipient,jdbcType=VARCHAR})
+			, #{lus_id,jdbcType=INTEGER}
+			, #{id_refrence,jdbcType=INTEGER} 
+			, #{jenis,jdbcType=INTEGER}                   
+			, #{ljs_id,jdbcType=INTEGER}
+			, #{mspo_policy_no,jdbcType=VARCHAR}
+			, #{reg_spaj,jdbcType=VARCHAR}
+		)
+    </insert>
+    
+	<insert id="insertMstSpajCrt" parameterType="java.util.HashMap" >
+		insert into EKA.MST_SPAJ_CRT (
+			NAME_PP, BOD_PP, AGE_PP, BEGDATE, INSPERIOD, ADDRESS, NAME_TT, BOD_TT, AGE_TT,
+			LSBS_ID, LSDBS_NUMBER, PREMI, UP, MSAG_ID, NO_SPAJ_GADGET, NO_TEMP, NO_POLICY, CERTIFICATE_DATE
+		)
+    	values (
+    		#{nama_pp,jdbcType=VARCHAR}, #{bod_pp,jdbcType=DATE}, #{age_pp,jdbcType=INTEGER},
+			#{begdate,jdbcType=DATE}, #{insperiod,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR},
+			#{name_tt,jdbcType=VARCHAR}, #{bod_tt,jdbcType=DATE}, #{age_tt,jdbcType=INTEGER},
+			#{lsbs_id,jdbcType=INTEGER}, #{lsdbs_number,jdbcType=INTEGER}, #{premi, jdbcType=DOUBLE},
+			#{up,jdbcType=DOUBLE}, #{msag_id,jdbcType=VARCHAR}, #{no_spaj_gadget,jdbcType=VARCHAR},
+			#{no_temp, jdbcType=VARCHAR}, #{no_policy,jdbcType=VARCHAR}, sysdate
+		)
+    </insert>
+</mapper>

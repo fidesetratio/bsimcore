@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace='com.app.dao.CommonDao'>
+	<delete id="deletePasSMS" parameterType="java.lang.String">
+         delete eka.mst_pas_sms where no_kartu  = #{no_kartu,jdbcType=VARCHAR}
+    </delete>
+    
+    <delete id="deletePositionSpajPas" parameterType="java.lang.String">
+         delete eka.mst_position_spaj_pas where reg_id  = #{msp_fire_id,jdbcType=VARCHAR}
+    </delete>
+    
+    <!--Delete m_reas_temp-->
+    <delete id="deleteMReasTemp" parameterType="string">
+            DELETE FROM EKA.M_REAS_TEMP  
+               WHERE REG_SPAJ =rpad(replace(#{spaj},'.'),11,' ') 
+        
+    </delete>
+
+    <!--Delete m_sar_temp-->
+    <delete id="deleteMSarTemp" parameterType="string">
+            DELETE FROM  EKA.M_SAR_TEMP   
+               WHERE REG_SPAJ =rpad(replace(#{spaj},'.'),11,' ') 
+    </delete>
+
+    <delete id="deleteMReasTempNew" parameterType="string">
+            DELETE FROM EKA.M_REAS_TEMP_NEW  
+               WHERE REG_SPAJ =rpad(replace(#{spaj},'.'),11,' ') 
+    </delete>
+	
+</mapper>

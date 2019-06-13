@@ -15,13 +15,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.core.ProcessPas;
+import com.app.dao.CommonDao;
 import com.app.model.bsim.Pas;
+import com.app.model.gadget.prod.User;
 import com.app.request.AJSMSIG;
 import com.app.request.Request;
 import com.app.response.BankSinarmasSyariahResponse;
@@ -29,6 +36,7 @@ import com.app.services.BsimService;
 import com.app.utils.CommonUtil;
 import com.app.utils.HashText;
 import com.app.utils.f_hit_umur;
+import com.msig.utils.Common;
 
 @RestController
 @RequestMapping("api")
@@ -49,7 +57,6 @@ public class RestPaBankSinarmas {
 		 if(bankSinarmasSyariahRequest == null){
 			 bss.setMessage("Request is not valid");
 			 bss.setResult("Failed");
-			
 		 }else{
 			 if(bankSinarmasSyariahRequest.getAjsmsig() == null){
 				 bss.setMessage("Request is not valid");
@@ -132,6 +139,11 @@ public class RestPaBankSinarmas {
 	    	};
 	    	
 	    	if(requestType == 1){
+	    		CommonDao commonDao = bsimService.getCommonDao();
+				PlatformTransactionManager transactionManager = bsimService.getTransactionManager();
+				/*	TransactionDefinition txDef = new DefaultTransactionDefinition();
+		        TransactionStatus txStatus = transactionManager.getTransaction(txDef);*/
+				
 	    		DateFormat df = new SimpleDateFormat("yyyyMMdd");
 	    		Pas pas = new Pas();
 	    		pas.setCif(ajsMsig.getCust_cif().trim());
@@ -207,9 +219,19 @@ public class RestPaBankSinarmas {
 						bsimService.update_no_va(no_va, no_temp);
 					}
 					
+					ProcessPas processPas = new ProcessPas(commonDao, transactionManager);
+					User currentUser = new User();
+					currentUser.setLus_id(new String("0"));
+					currentUser.setJn_bank(new Integer(1));
+				    processPas.processPas("update", pas, "input", currentUser);
+					
+					
+					
 				} catch (Exception e) {
+					System.out.println("hehehe");
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				//	 transactionManager.commit(txStatus);
 				}
 				
 				

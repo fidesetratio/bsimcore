@@ -14,8 +14,11 @@ import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import com.app.core.ProcessPas;
 import com.app.dao.BsimDao;
+import com.app.dao.CommonDao;
 import com.app.model.bsim.Pas;
+import com.app.model.gadget.prod.Cmdeditbac;
 
 @Service
 public class BsimService {
@@ -51,7 +54,13 @@ public class BsimService {
 		BsimDao dao=sqlSession.getMapper(BsimDao.class);
 		return dao.selectBsimNoVaSyariah();
 }
-	 
+	public CommonDao getCommonDao(){
+		CommonDao dao=sqlSession.getMapper(CommonDao.class);
+		return dao;
+	}
+	
+	
+	
 	 
 	 public Pas insert(Pas pas) throws Exception{
 		BsimDao dao=sqlSession.getMapper(BsimDao.class);
@@ -90,6 +99,9 @@ public class BsimService {
     			
     			//input mst_pas_sms
     			dao.insertPas(pas);   
+    			
+    			
+    			
     		
     		//update mst_kartu_pas 
     			
@@ -121,7 +133,9 @@ public class BsimService {
         return pas;
 	}
 	
-
+	 public PlatformTransactionManager getTransactionManager(){
+		 return transactionManager;
+	 }
 	 
 	 
 	  public Long select_counter(Integer number , String lca_id) {

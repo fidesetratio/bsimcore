@@ -34,6 +34,7 @@ public interface BsimDao {
 		void updateMstCounter(Map params);
 		void updateKartuPas(Map params);
 		void updateVa(Map params);
+		void updatePas(Pas pas);
 		
 		//insert
 		void insertPas(Pas pas);

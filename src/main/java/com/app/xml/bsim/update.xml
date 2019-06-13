@@ -27,5 +27,165 @@
 	</update>
 	
 	
+	<update id="updatePas" parameterType="com.app.model.bsim.Pas">
+        UPDATE eka.mst_pas_sms                                                
+        <set>                                                       
+            <if test="msp_kode_sts_sms != null">msp_kode_sts_sms = upper(#{msp_kode_sts_sms:VARCHAR}),</if>
+            <if test="msp_desc_sts_sms != null">msp_desc_sts_sms = upper(#{msp_desc_sts_sms:VARCHAR}),</if>
+            <if test="msp_mobile != null">msp_mobile = upper(#{msp_mobile:VARCHAR}),</if>
+            <if test="msp_mobile2 != null">msp_mobile2 = upper(#{msp_mobile2:VARCHAR}),</if>
+            <if test="msp_text != null">msp_text = upper(#{msp_text}),</if>
+            <if test="msp_message_date != null">msp_message_date = #{msp_message_date:DATE},</if>
+            <if test="msp_receive_date != null">msp_receive_date = #{msp_receive_date:DATE},</if>
+            <if test="msp_rek_cabang != null">msp_rek_cabang = upper(#{msp_rek_cabang:VARCHAR}),</if>
+            <if test="msp_rek_nama != null">msp_rek_nama = upper(#{msp_rek_nama:VARCHAR}),</if>
+            <if test="msp_rek_nama_autodebet != null">msp_rek_nama_autodebet = upper(#{msp_rek_nama_autodebet:VARCHAR}),</if>
+            <if test="msp_rek_kota != null">msp_rek_kota = upper(#{msp_rek_kota:VARCHAR}),</if>
+            <if test="msp_full_name != null">msp_full_name = upper(#{msp_full_name:VARCHAR}),</if>
+            <if test="msp_identity_no != null">msp_identity_no = upper(#{msp_identity_no:VARCHAR}),</if>
+            <if test="msp_identity_no_tt != null">msp_identity_no_tt = upper(#{msp_identity_no_tt:VARCHAR}),</if>
+            <if test="msp_date_of_birth != null">msp_date_of_birth = #{msp_date_of_birth:DATE},</if>
+            <if test="msp_address_1 != null">msp_address_1 = upper(#{msp_address_1:VARCHAR}),</if>
+            <if test="msp_address_2 != null">msp_address_2 = upper(#{msp_address_2:VARCHAR}),</if>
+            <if test="msp_city != null">msp_city = upper(#{msp_city:VARCHAR}),</if>
+            <if test="msp_postal_code != null">msp_postal_code = upper(#{msp_postal_code:VARCHAR}),</if>
+            <if test="dist != null">dist = upper(#{dist:VARCHAR}),</if>
+            <if test="pin != null">pin = upper(#{pin:VARCHAR}),</if>
+            <if test="no_kartu != null">no_kartu = upper(#{no_kartu:VARCHAR}),</if>
+            <if test="msp_fire_export_flag != null">msp_fire_export_flag = #{msp_fire_export_flag:INTEGER},</if>
+            <if test="msp_fire_export_date != null">msp_fire_export_date = #{msp_fire_export_date:DATE},</if>
+            <if test="lspd_id != null">lspd_id = #{lspd_id:INTEGER},</if>
+            <if test="lssp_id != null">lssp_id = #{lssp_id:INTEGER},</if>
+            <if test="lssa_id != null">lssa_id = #{lssa_id:INTEGER},</if>
+            <if test="lscb_id != null">lscb_id = #{lscb_id:INTEGER},</if>
+            <if test="lsbp_id != null">lsbp_id = #{lsbp_id:INTEGER},</if>
+            <if test="lsbp_id_autodebet != null">lsbp_id_autodebet = #{lsbp_id_autodebet:INTEGER},</if>
+            <if test="msp_flag_aksep != null">msp_flag_aksep = #{msp_flag_aksep:INTEGER},</if>
+            <if test="msp_pas_phone_number != null">msp_pas_phone_number = #{msp_pas_phone_number:VARCHAR},</if>
+            <if test="msp_pas_accept_date != null">msp_pas_accept_date = #{msp_pas_accept_date:DATE},</if>
+            <if test="msp_pas_beg_date != null">msp_pas_beg_date = #{msp_pas_beg_date:DATE},</if>
+            <if test="msp_pas_end_date != null">msp_pas_end_date = #{msp_pas_end_date:DATE},</if>
+            <if test="msp_admin_date != null">msp_admin_date = #{msp_admin_date:DATE},</if>
+            <if test="msp_fire_accept_date != null">msp_fire_accept_date = #{msp_fire_accept_date:DATE},</if>
+            <if test="msp_fire_okupasi_else != null">msp_fire_okupasi_else = #{msp_fire_okupasi_else:VARCHAR},</if>
+            <if test="msp_fire_ins_addr_envir_else != null">msp_fire_ins_addr_envir_else = #{msp_fire_ins_addr_envir_else:VARCHAR},</if>
+            <if test="msp_fire_beg_date != null">msp_fire_beg_date = #{msp_fire_beg_date:DATE},</if>
+            <if test="msp_fire_end_date != null">msp_fire_end_date = #{msp_fire_end_date:DATE},</if>
+            <if test="msp_fire_policy_no != null">msp_fire_policy_no = upper(#{msp_fire_policy_no:VARCHAR}),</if>
+            <if test="msp_fire_code_name != null">msp_fire_code_name = upper(#{msp_fire_code_name:VARCHAR}),</if>
+            <if test="msp_fire_insured_city != null">msp_fire_insured_city = #{msp_fire_insured_city:VARCHAR},</if>
+            <if test="msp_fire_insured_phone_number != null">msp_fire_insured_phone_number = upper(#{msp_fire_insured_phone_number:VARCHAR}),</if>
+            <if test="msp_fire_name != null">msp_fire_name = upper(#{msp_fire_name:VARCHAR}),</if>
+            <if test="msp_fire_id != null">msp_fire_id = upper(#{msp_fire_id:VARCHAR}),</if>
+            <if test="msp_fire_identity != null">msp_fire_identity = upper(#{msp_fire_identity:VARCHAR}),</if>
+            <if test="msp_fire_occupation != null">msp_fire_occupation = upper(#{msp_fire_occupation:VARCHAR}),</if>
+            <if test="msp_fire_type_business != null">msp_fire_type_business = upper(#{msp_fire_type_business:VARCHAR}),</if>
+            <if test="msp_fire_source_fund != null">msp_fire_source_fund = upper(#{msp_fire_source_fund:VARCHAR}),</if>
+            <if test="msp_fire_address_1 != null">msp_fire_address_1 = upper(#{msp_fire_address_1:VARCHAR}),</if>
+            <if test="msp_fire_addr_code != null">msp_fire_addr_code = upper(#{msp_fire_addr_code:VARCHAR}),</if>
+            <if test="msp_fire_phone_number != null">msp_fire_phone_number = upper(#{msp_fire_phone_number:VARCHAR}),</if>
+            <if test="msp_fire_email != null">msp_fire_email = upper(#{msp_fire_email:VARCHAR}),</if>
+            <if test="msp_fire_okupasi != null">msp_fire_okupasi = upper(#{msp_fire_okupasi:VARCHAR}),</if>
+            <if test="msp_fire_postal_code != null">msp_fire_postal_code = upper(#{msp_fire_postal_code:VARCHAR}),</if>
+            <if test="msp_fire_mobile != null">msp_fire_mobile = upper(#{msp_fire_mobile:VARCHAR}),</if>
+            <if test="msp_fire_fail_desc != null">msp_fire_fail_desc = upper(#{msp_fire_fail_desc:VARCHAR}),</if>
+            <if test="msp_fire_insured_addr_code != null">msp_fire_insured_addr_code = upper(#{msp_fire_insured_addr_code:VARCHAR}),</if>
+            <if test="msp_fire_insured_addr != null">msp_fire_insured_addr = upper(#{msp_fire_insured_addr:VARCHAR}),</if>
+            <if test="msp_fire_insured_postal_code != null">msp_fire_insured_postal_code = upper(#{msp_fire_insured_postal_code:VARCHAR}),</if>
+            <if test="msp_fire_insured_addr_no != null">msp_fire_insured_addr_no = upper(#{msp_fire_insured_addr_no:VARCHAR}),</if>
+            <if test="msp_fire_insured_addr_envir != null">msp_fire_insured_addr_envir = #{msp_fire_insured_addr_envir:VARCHAR},</if>
+            <if test="msp_fire_date_of_birth != null">msp_fire_date_of_birth = #{msp_fire_date_of_birth:DATE},</if>
+            <if test="msp_fire_fail_date != null">msp_fire_fail_date = #{msp_fire_fail_date:DATE},</if>
+            <if test="msp_no_rekening != null">msp_no_rekening = upper(#{msp_no_rekening:VARCHAR}),</if>
+            <if test="msp_no_rekening_autodebet != null">msp_no_rekening_autodebet = upper(#{msp_no_rekening_autodebet:VARCHAR}),</if>
+            <if test="msag_id != null">msag_id = upper(#{msag_id:VARCHAR}),</if>
+            <if test="lrb_id != null">lrb_id = #{lrb_id:INTEGER},</if>
+            msag_id_pp = #{msag_id_pp:VARCHAR},         
+            <if test="kode_ao != null">kode_ao = upper(#{kode_ao:VARCHAR}),</if>
+            <if test="pribadi != null">pribadi = #{pribadi:INTEGER},</if>
+            <if test="msp_flag_cc != null">msp_flag_cc = upper(#{msp_flag_cc:VARCHAR}),</if>
+            <if test="lus_id != null">lus_id = #{lus_id:INTEGER},</if>
+            <if test="lus_id_uw_pas != null">lus_id_uw_pas = #{lus_id_uw_pas:INTEGER},</if>
+            <if test="lus_id_uw_fire != null">lus_id_uw_fire = #{lus_id_uw_fire:INTEGER},</if>
+            <if test="lus_id_uw_batal != null">lus_id_uw_batal = #{lus_id_uw_batal:INTEGER},</if>
+            <if test="mspo_policy_no != null">mspo_policy_no = upper(#{mspo_policy_no:VARCHAR}),</if>
+            <if test="reg_spaj != null">reg_spaj = upper(#{reg_spaj:VARCHAR}),</if>
+            <if test="mspo_plan_provider != null">mspo_plan_provider = upper(#{mspo_plan_provider:VARCHAR}),</if>
+            <if test="msp_pas_tmp_lhr_tt != null">msp_pas_tmp_lhr_tt = #{msp_pas_tmp_lhr_tt:VARCHAR},</if>
+            <if test="msp_pas_dob_pp != null">msp_pas_dob_pp = #{msp_pas_dob_pp:DATE},</if>
+            <if test="lsre_id != null">lsre_id = #{lsre_id:INTEGER},</if>
+            <if test="produk != null">produk = #{produk:INTEGER},</if>
+            <if test="msp_sex_pp != null">msp_sex_pp = #{msp_sex_pp:INTEGER},</if>
+            <if test="msp_sex_tt != null">msp_sex_tt = #{msp_sex_tt:INTEGER},</if>
+            <if test="msp_exist_bp != null">msp_exist_bp = #{msp_exist_bp:INTEGER},</if>
+            <if test="msp_pas_nama_pp != null">msp_pas_nama_pp = upper(#{msp_pas_nama_pp:VARCHAR}),</if>
+            <if test="msp_pas_email != null">msp_pas_email = upper(#{msp_pas_email:VARCHAR}),</if>
+            <if test="msp_pas_tmp_lhr_pp != null">msp_pas_tmp_lhr_pp = upper(#{msp_pas_tmp_lhr_pp:VARCHAR}),</if>
+            <if test="msp_tgl_debet != null">msp_tgl_debet = #{msp_tgl_debet:DATE},</if>
+            <if test="msp_tgl_valid != null">msp_tgl_valid = #{msp_tgl_valid:DATE},</if>
+            <if test="msp_ket_batal != null">msp_ket_batal = #{msp_ket_batal:DATE},</if>
+            <if test="msp_tgl_batal != null">msp_tgl_batal = #{msp_tgl_batal:DATE},</if>
+            <if test="msp_tgl_transfer != null">msp_tgl_transfer = #{msp_tgl_transfer:DATE},</if>
+            <if test="msp_warga != null">msp_warga = #{msp_warga:INTEGER},</if>
+            <if test="msp_warga_else != null">msp_warga_else = upper(#{msp_warga_else:VARCHAR}),</if>
+            <if test="msp_status_nikah != null">msp_status_nikah = #{msp_status_nikah:INTEGER},</if>
+            <if test="msp_agama != null">msp_agama = #{msp_agama:VARCHAR},</if>
+            <if test="msp_pendidikan != null">msp_pendidikan = #{msp_pendidikan:INTEGER},</if>
+            <if test="msp_pendidikan_else != null">msp_pendidikan_else = upper(#{msp_pendidikan_else:VARCHAR}),</if>
+            <if test="msp_occupation != null">msp_occupation = #{msp_occupation:VARCHAR},</if>
+            <if test="msp_occupation_else != null">msp_occupation_else = upper(#{msp_occupation_else:VARCHAR}),</if>
+            <if test="msp_company_name != null">msp_company_name = upper(#{msp_company_name:VARCHAR}),</if>
+            <if test="msp_company_usaha != null">msp_company_usaha = #{msp_company_usaha:INTEGER},</if>
+            <if test="msp_company_jabatan != null">msp_company_jabatan = upper(#{msp_company_jabatan:VARCHAR}),</if>
+            <if test="msp_company_address != null">msp_company_address = upper(#{msp_company_address:VARCHAR}),</if>
+            <if test="msp_company_postal_code != null">msp_company_postal_code = upper(#{msp_company_postal_code:VARCHAR}),</if>
+            <if test="msp_company_phone_number != null">msp_company_phone_number = #{msp_company_phone_number:VARCHAR},</if>
+            msp_cek_ktp = #{msp_cek_ktp:INTEGER},
+            msp_cek_kk = #{msp_cek_kk:INTEGER},
+            msp_cek_npwp = #{msp_cek_npwp:INTEGER},
+            msp_cek_bukti_bayar = #{msp_cek_bukti_bayar:INTEGER},
+            msp_cek_srt_keterangan = #{msp_cek_srt_keterangan:INTEGER},
+            msp_cek_rekening = #{msp_cek_rekening:INTEGER},
+            msp_cek_ktp_uw = #{msp_cek_ktp_uw:INTEGER},
+            msp_cek_kk_uw = #{msp_cek_kk_uw:INTEGER},
+            msp_cek_npwp_uw = #{msp_cek_npwp_uw:INTEGER},
+            msp_cek_bukti_bayar_uw = #{msp_cek_bukti_bayar_uw:INTEGER},
+            msp_cek_srt_keterangan_uw = #{msp_cek_srt_keterangan_uw:INTEGER},
+            msp_cek_rekening_uw = #{msp_cek_rekening_uw:INTEGER},
+            msp_cek_akte_kelahiran = #{msp_cek_akte_kelahiran:INTEGER},
+            msp_cek_akte_kelahiran_uw = #{msp_cek_akte_kelahiran_uw:INTEGER},
+            msp_cek_tandatangan = #{msp_cek_tandatangan:INTEGER},
+            msp_cek_tandatangan_uw = #{msp_cek_tandatangan_uw:INTEGER},
+            <if test="lsag_id != null">lsag_id = #{lsag_id:INTEGER},</if>
+            <if test="msp_exist_bp_name != null">msp_exist_bp_name = upper(#{msp_exist_bp_name:VARCHAR}),</if>
+            <if test="msp_area_code_rumah != null">msp_area_code_rumah = #{msp_area_code_rumah:VARCHAR},</if>
+            <if test="lside_id != null">lside_id = #{lside_id:INTEGER},</if>
+            <if test="msp_up != null">msp_up = #{msp_up:VARCHAR},</if>
+            <if test="msp_premi != null">msp_premi = #{msp_premi:VARCHAR},</if>
+            <if test="msp_company_area_code != null">msp_company_area_code = upper(#{msp_company_area_code:VARCHAR}),</if>
+            <if test="product_code != null">product_code = #{product_code:VARCHAR},</if>
+            <if test="jenis_pas != null">jenis_pas = upper(#{jenis_pas:VARCHAR}),</if>
+            <if test="msp_company_email != null">msp_company_email = #{msp_company_email:VARCHAR},</if>
+            <if test="msp_company_fax != null">msp_company_fax = #{msp_company_fax:VARCHAR},</if>
+            <if test="msp_company_ijin_usaha != null">msp_company_ijin_usaha = #{msp_company_ijin_usaha:VARCHAR},</if>
+            <if test="msp_rt != null">msp_rt = #{msp_rt:VARCHAR},</if>
+            <if test="msp_rw != null">msp_rw = #{msp_rw:VARCHAR},</if>
+            <if test="msp_kecamatan != null">msp_kecamatan = #{msp_kecamatan:VARCHAR},</if>
+            <if test="msp_propinsi != null">msp_propinsi = #{msp_propinsi:VARCHAR},</if>
+            <if test="msp_pas_npwp != null">msp_pas_npwp = #{msp_pas_npwp:VARCHAR},</if>
+            <if test="mcl_id_pp != null">mcl_id_pp = upper(#{mcl_id_pp:VARCHAR}),</if>
+            <if test="mcl_id_tt != null">mcl_id_tt = upper(#{mcl_id_tt:VARCHAR}),</if>
+            <if test="msp_still_bp != null">msp_still_bp = #{msp_still_bp:INTEGER},</if>
+            <if test="msp_partner_exist_bp != null">msp_partner_exist_bp = #{msp_partner_exist_bp:INTEGER},</if>
+            <if test="msp_partner_still_bp != null">msp_partner_still_bp = #{msp_partner_still_bp:INTEGER},</if>
+            <if test="lju_id != null">lju_id = #{lju_id:INTEGER},</if>                        
+            <if test="application_id != null">application_id = #{application_id:VARCHAR},</if>
+            <if test="reff_id != null">reff_id = #{reff_id:INTEGER},</if>
+            <if test="lcb_no != null">lcb_no = #{lcb_no:VARCHAR},</if>
+            <if test="lcb_reff != null">lcb_reff = #{lcb_reff:VARCHAR}</if>          
+        </set>                                                                     
+        WHERE MSP_ID = #{msp_id:NUMERIC}   
+    </update>
+	
 	
 </mapper>

@@ -1,5 +1,9 @@
 package com.app.utils;
 
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,6 +34,23 @@ public class CommonUtil {
 	        
 	        return isNumberFlag;
 	    }
+	  
+		public static boolean isEmpty(Object cek) {
+			if(cek==null) return true;
+			else	if(cek instanceof String) {
+				String tmp = (String) cek;
+					if(tmp.trim().equals("")) return true;
+					else return false;
+			}else if(cek instanceof List) {
+				List tmp = (List) cek;
+				return tmp.isEmpty();
+			}else if(cek instanceof Map){
+				return ((Map) cek).isEmpty();
+			}else if(cek instanceof Integer || cek instanceof Long|| cek instanceof Double|| cek instanceof Float|| cek instanceof BigDecimal || cek instanceof Date){
+				return false;
+			}
+			return true;
+		}
 	  
 	  public static boolean isEmailValid(String email) {
 			boolean isValid = false;
