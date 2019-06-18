@@ -36,6 +36,7 @@ public class User implements Serializable, HttpSessionBindingListener {
 	private String lus_full_name;
 	private int screenWidth;
 	private int screenHeight;
+	private int comboBoxSize;
 	private Integer lus_admin;
 	private String cab_bank;
 	private Integer valid_bank_1;
@@ -508,6 +509,9 @@ public class User implements Serializable, HttpSessionBindingListener {
 	}
 	public void setLus_password(String lus_password) {
 		this.lus_password = lus_password;
+	}
+	public void setComboBoxSize(int comboBoxSize) {
+		this.comboBoxSize = comboBoxSize;
 	}
 
 	

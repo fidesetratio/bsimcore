@@ -22,15 +22,15 @@ import com.app.utils.FormatString;
 
 public class MobileSubmit extends AbstractSubmit {
 
-	protected MobileSubmit(PlatformTransactionManager platform,
+	public MobileSubmit(PlatformTransactionManager platform,
 			SqlSession sqlSession) {
 		super(platform, sqlSession);
 	}
 
 	@Override
-	protected Cmdeditbac save(Cmdeditbac edit) throws Exception {
+	public Cmdeditbac save(Cmdeditbac edit) throws Exception {
 		// TODO Auto-generated method stub
-
+		this.init();
 		TransactionDefinition txDef = new DefaultTransactionDefinition();
         TransactionStatus txStatus = transactionManager.getTransaction(txDef);
 
@@ -58,7 +58,8 @@ public class MobileSubmit extends AbstractSubmit {
               Date ldt_endpay5 =null;
               Integer ai_month=null;          
               String kode_id = null;
-              
+              String no_temp=edit.getNo_temp();
+           
               
               Integer flag_gutri = edit.getDatausulan().getFlag_gutri();
               if (flag_gutri  == null)
@@ -389,6 +390,9 @@ public class MobileSubmit extends AbstractSubmit {
             // proc_save_product_insured(edit,strTmpSPAJ,v_intActionBy ,flag_jenis_plan, ldt_endpay1,currentUser);
             save_product_insured(edit,strTmpSPAJ,v_intActionBy ,flag_jenis_plan, ldt_endpay1, null, commonDao);      
             
+            if(jumlah_rider == null){
+            	jumlah_rider = new Integer(0);
+            }
             
             if (jumlah_rider.intValue()>0)
             {
@@ -458,11 +462,12 @@ public class MobileSubmit extends AbstractSubmit {
             
             
             if(edit.getPemegang().getFlag_upload()!=null){
-            	String no_temp=edit.getNo_temp();
+            	//String no_temp=edit.getNo_temp();
                 updateSpajTemp(no_temp,edit.getPemegang().getReg_spaj(), commonDao);
                 updateProductTemp(no_temp,edit.getPemegang().getReg_spaj(), commonDao);
                 updateAddressBillingTemp(no_temp,edit.getPemegang().getReg_spaj(), commonDao);
                 updatePesertaTemp(no_temp,edit.getPemegang().getReg_spaj(), commonDao);
+
                 Integer questTemp = selectCountQuestionaireTemp(no_temp, commonDao);
                 Integer MedquestTemp=selectCountMedquestTemp(no_temp, commonDao);
                 Integer benefTemp=selectCountbenefTemp(no_temp, commonDao);
@@ -481,7 +486,6 @@ public class MobileSubmit extends AbstractSubmit {
                 if(!edit.getTertanggung().getMste_no_vacc().equals("")){
                     Map map = new HashMap();
                     map.put("no_va", edit.getTertanggung().getMste_no_vacc());      
-                //  map.put("lus_id", currentUser.getLus_id());
                     map.put("lus_id", null);
                     map.put("spaj",edit.getPemegang().getReg_spaj());
                     updateMstDetVa(map, commonDao);
@@ -491,11 +495,16 @@ public class MobileSubmit extends AbstractSubmit {
             
             transactionManager.commit(txStatus);
             
+            
+            
         }catch(Exception e){
+        	   e.printStackTrace();
         	   transactionManager.rollback(txStatus);
         }
         
-        
+        if(edit.getPemegang().getReg_spaj() != null){
+        	return edit;
+        }
 		return null;
 	}
 

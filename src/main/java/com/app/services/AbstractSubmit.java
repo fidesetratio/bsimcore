@@ -1011,16 +1011,50 @@ abstract class AbstractSubmit {
 	            //Hitung Biaya Ulink dulu
 	            double[] biayaUlink = {0, 0, 0, 0};
 	            
+	            
+	            List l = edit.getInvestasiutama().getDaftarbiaya();
+	            for(int i=0;i<l.size();i++){
+	            	if(l.get(i) instanceof Map){
+	            		Map m = (Map)l.get(i);
+	            		biayaUlink[(Integer)m.get("mu_ke")] += (Double)m.get("mbu_jumlah");
+	            		 
+	            	}else{
+	            	    Biayainvestasi bi = (Biayainvestasi) edit.getInvestasiutama().getDaftarbiaya().get(i);
+		                biayaUlink[bi.getMu_ke()] += bi.getMbu_jumlah();
+	            		
+	            	};
+	            }
+	            /*
 	            for(int i=0; i<edit.getInvestasiutama().getDaftarbiaya().size(); i++) {
 	                Biayainvestasi bi = (Biayainvestasi) edit.getInvestasiutama().getDaftarbiaya().get(i);
 	                biayaUlink[bi.getMu_ke()] += bi.getMbu_jumlah();
 	            }
-	            
+	            */
 	            int mu_ke = 1;  
 	            //Save MST_ULINK untuk Premi Pokok
 	            proc_save_mst_ulink(edit,strTmpSPAJ, v_intActionBy ,v_tglsurat,1,1,1,v_curBasePremium,v_jmlhtopup_berkala,v_jmlhtopup_tunggal , v_topup_berkala,v_topup_tunggal,v_strBeginDate,"", commonDao);
 	            //Save MST_DET_ULINK untuk Premi Pokok
 	            for(int i=0; i<invvl.size(); i++) {
+	            	
+	            if(invvl.get(i) instanceof Map){
+	            	Map m = (Map)invvl.get(i) ;
+	            	Integer mdu_persen1 = (Integer)m.get("mdu_persen1");
+	            	String lji_id1 = (String)m.get("lji_id1");
+	            	
+	            //	{mu_ke1=null, lji_id1=03, mdu_persen1=100, mdu_jumlah1=0.0, lji_invest1=Excellink Aggressive Fund, reg_spaj1=null, mdu_jumlah_top=null, mdu_jumlah_top_tunggal=null}
+	            	if(mdu_persen1 != null){
+	            		if(mdu_persen1 >0){
+	            			int persen_tu = 0; 
+	            		     proc_save_det_ulink(edit, strTmpSPAJ, v_intActionBy, mdu_persen1, persen_tu, mdu_persen1 * (v_curBasePremium - biayaUlink[mu_ke]) /100, mu_ke, lji_id1, v_strBeginDate, commonDao);
+	            		         
+	            		}
+	            	}
+	            	
+	            	//System.out.println(m);
+	            	
+	            }else{
+	            	
+	            	
 	                DetilInvestasi di = (DetilInvestasi) invvl.get(i);
 	                if(di.getMdu_persen1() != null) {
 	                    if(di.getMdu_persen1() > 0) {
@@ -1029,6 +1063,10 @@ abstract class AbstractSubmit {
 	                        proc_save_det_ulink(edit, strTmpSPAJ, v_intActionBy, di.getMdu_persen1(), persen_tu, di.getMdu_persen1() * (v_curBasePremium - biayaUlink[mu_ke]) /100, mu_ke, di.getLji_id1(), v_strBeginDate, commonDao);
 	                    }
 	                }
+	                
+	            };
+	                
+	                
 	            }       
 	            if (v_topup_berkala.intValue() > 0 ){
 	                mu_ke++;
@@ -1082,8 +1120,32 @@ abstract class AbstractSubmit {
 	                }
 	            }
 	            
+	            l = edit.getInvestasiutama().getDaftarbiaya();
+	            
+	            
+	            
 	            for(int i=0; i<edit.getInvestasiutama().getDaftarbiaya().size(); i++) {
-	                Biayainvestasi bi = (Biayainvestasi) edit.getInvestasiutama().getDaftarbiaya().get(i);
+	            	
+
+	                Biayainvestasi bi = null;
+	                
+	                
+	            	if(edit.getInvestasiutama().getDaftarbiaya().get(i) instanceof Map){
+
+	            		 Map m  = (Map) edit.getInvestasiutama().getDaftarbiaya().get(i);
+	            		 
+	            		 bi = new Biayainvestasi();
+	            		 bi.setLjb_id((Integer)m.get("ljb_id"));
+	            		 bi.setMbu_jumlah((Double)m.get("mbu_jumlah"));
+	            		 bi.setMbu_persen((Double)m.get("mbu_persen"));
+	            		 bi.setMu_ke((Integer)m.get("mu_ke"));
+	            		 
+
+	            	}else{
+	            		 bi = (Biayainvestasi) edit.getInvestasiutama().getDaftarbiaya().get(i);
+	            	}
+	            	
+	               
 	                
 	                if(edit.getDatausulan().getLsbs_id().intValue() != 202 && edit.getDatausulan().getLsbs_id().intValue() != 162 && 
 	                        edit.getDatausulan().getLsbs_id().intValue() != 159 && edit.getDatausulan().getLsbs_id().intValue() != 160 && edit.getDatausulan().getLsbs_id().intValue() != 191 &&
@@ -1194,7 +1256,7 @@ abstract class AbstractSubmit {
 	            edit.getInvestasiutama().setMu_tgl_trans(tgl_trans);
 	            edit.getInvestasiutama().setMu_premi_ke(premi_ke);
 	            int rowupdated = update_mst_ulink(edit.getInvestasiutama(), commonDao);        
-	            if (rowupdated ==0)
+	            if (rowupdated <=0)
 	            {
 	                insert_mst_ulink(edit.getInvestasiutama(), commonDao); 
 	            }
@@ -2347,7 +2409,7 @@ abstract class AbstractSubmit {
            
            // Insert Insured Client information to MST_ADDRESS_NEW
            int rowupdated1 = updateMstAddressTtg( edit.getTertanggung(), commonDao);
-           if (rowupdated1 ==0)
+           if (rowupdated1 <=0)
            {
                insertMstAddressTtg( edit.getTertanggung(),commonDao );
                //System.out.println("insert mst address ttg");
@@ -2859,12 +2921,12 @@ protected void save_suamiistri_pp(Cmdeditbac edit, String counterSpaj, CommonDao
 						dataPolicy.put("reg_spaj", strTmpSPAJ);
 						dataPolicy.put("mspo_payer",strPemPremiID);
 						Integer rowupdated1 = updateNewClientPayerBadanHukum(edit.getPembayarPremi(),commonDao);
-						if (rowupdated1 == 0){
+						if (rowupdated1 <= 0){
 		                    insertNewClientPayerBadanHukum(edit.getPembayarPremi(), commonDao);
 		                }
 						
 						Integer rowupdated2 = updateAddressPemPremiIndividu(edit.getPembayarPremi(), commonDao);
-		                if (rowupdated2 == 0){
+		                if (rowupdated2 <= 0){
 		                    insertAddressPemPremiBadanHukum(edit.getPembayarPremi(), commonDao);
 		                }
 		                updateMstPolicyPayer(dataPolicy, commonDao);    
@@ -2880,12 +2942,12 @@ protected void save_suamiistri_pp(Cmdeditbac edit, String counterSpaj, CommonDao
 		                  dataPolicy.put("mspo_payer", strPemPremiID);
 		                  
 		                  Integer rowupdated1 = updateNewClientPayerIndividu(edit.getPembayarPremi(), commonDao);                
-		                  if (rowupdated1 == 0){
+		                  if (rowupdated1 <= 0){
 		                       insertNewClientPayerIndividu(edit.getPembayarPremi(), commonDao);
 		                  }
 		                  
 		                  Integer rowupdated2 = updateAddressPemPremiIndividu(edit.getPembayarPremi(), commonDao);
-		                  if (rowupdated2 == 0){
+		                  if (rowupdated2 <= 0){
 		                      insertAddressPemPremiIndividu(edit.getPembayarPremi(), commonDao);
 		                  }
 		                  updateMstPolicyPayer(dataPolicy, commonDao);   
@@ -3159,7 +3221,7 @@ protected void save_suamiistri_pp(Cmdeditbac edit, String counterSpaj, CommonDao
    	            result = commonDao.selectCountQuestionaireTemp( no_temp );
    	        }catch(Exception e){
    	            result = 0;
-   	            throw e;
+   	            
    	        }
    	        return result;
    	       }   
@@ -3169,7 +3231,7 @@ protected void save_suamiistri_pp(Cmdeditbac edit, String counterSpaj, CommonDao
    	             result = commonDao.selectCountMedquestTemp( no_temp );
    	         }catch(Exception e){
    	             result = 0;
-   	             throw e;    
+   	            
    	         }
    	         return result;
    	        }
@@ -3180,7 +3242,7 @@ protected void save_suamiistri_pp(Cmdeditbac edit, String counterSpaj, CommonDao
    	                result = commonDao.selectCountbenefTemp( no_temp );
    	            }catch(Exception e){
    	                result = 0;
-   	                throw e;        
+   	               
    	            }
    	            return result;
    	       }    
@@ -3190,7 +3252,7 @@ protected void save_suamiistri_pp(Cmdeditbac edit, String counterSpaj, CommonDao
    	         try {
    	             result = commonDao.selectCountReffBiiTemp( no_temp );
    	         }catch(Exception e){
-   	             throw e;            
+   	             result = "";     
    	         }
    	         return result;
    	        }
