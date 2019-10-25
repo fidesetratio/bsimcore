@@ -101,7 +101,7 @@ public interface CommonDao {
 	    String selectBusinessId(String spaj);
 	    Integer selectBusinessNumber(String spaj);
 	    List selectCabangKK(String lcb_no);
-	  
+	 
 	  	void insertPas(Pas pas);
 	  	void insertMstPositionSpajPas(Map params);
 	  	void insertMstClientNew(Client client);

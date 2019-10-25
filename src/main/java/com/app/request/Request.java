@@ -7,6 +7,8 @@ public class Request {
 	private AJSMSIG ajsmsig;
 	
 	private String data;
+	
+	
 
 	public Request(){
 		//	this.AJSMSIG = new AJSMSIG();

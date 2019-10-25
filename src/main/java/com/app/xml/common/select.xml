@@ -2530,4 +2530,10 @@ FROM(   SELECT SUBSTR (client.MCL_ID, 1, 2) AS SYMBOL,
         and a.mspr_active = 1
         order by a.lsbs_id
     </select>
+    
+    
+    
+
+	
+	
 </mapper>

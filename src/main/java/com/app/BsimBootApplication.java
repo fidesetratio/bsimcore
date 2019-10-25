@@ -54,7 +54,7 @@ public class BsimBootApplication  implements CommandLineRunner {
 /*		Cmdeditbac edit = loadObject();
 		submitService.save(edit);*/
 
-		Cmdeditbac edit = loadObject("pa.json");
+	/*	Cmdeditbac edit = loadObject("pa.json");
 		MobileSubmit paSubmit = new MobileSubmit(transactionManager, sqlSession);
 		try {
 			edit = paSubmit.save(edit);
@@ -62,7 +62,7 @@ public class BsimBootApplication  implements CommandLineRunner {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		/*Assert.assertTrue(edit.getPemegang().getReg_spaj()!=null);*/
 	}
 	

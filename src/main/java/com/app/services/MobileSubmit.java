@@ -492,7 +492,7 @@ public class MobileSubmit extends AbstractSubmit {
                 }      
             }
             edit.getPemegang().setReg_spaj(strTmpSPAJ);
-            
+            Paralel_Lanjutan(edit, commonDao);
             transactionManager.commit(txStatus);
             
             
@@ -508,4 +508,97 @@ public class MobileSubmit extends AbstractSubmit {
 		return null;
 	}
 
+	
+	
+	protected void save_mst_insured(Cmdeditbac edit,String strInsClientID,String strTmpSPAJ,CommonDao commonDao){
+	 	edit.getDatausulan().setReg_spaj(strTmpSPAJ);
+        edit.getTertanggung().setMste_insured(strInsClientID);
+        edit.getTertanggung().setMste_age(edit.getTertanggung().getUsiattg());
+        
+        Date v_strPaymentDate=null;
+        Date strDebitDate= null;
+        v_strPaymentDate = edit.getPemegang().getMste_tgl_recur();          
+        if (v_strPaymentDate != null)
+        {
+            strDebitDate = v_strPaymentDate;
+        };
+        
+        edit.getPemegang().setMste_tgl_recur(strDebitDate);
+        edit.getDatausulan().setLus_id(edit.getPemegang().getLus_id());
+        
+        Integer v_intAutoDebet = edit.getDatausulan().getMste_flag_cc();
+        
+        Integer lssa_id = new Integer(0);
+        Integer flag_worksite = edit.getDatausulan().getFlag_worksite();
+        if (flag_worksite.intValue()==1 && v_intAutoDebet.intValue() == 3)
+        {
+            lssa_id = new Integer(3);
+        }else{
+            lssa_id = new Integer(1);
+        }
+        edit.getDatausulan().setLssa_id(lssa_id);
+        Integer flag_el = edit.getDatausulan().getMste_flag_el();
+        if (flag_el == null)
+        {
+            edit.getDatausulan().setMste_flag_el(new Integer(0));
+        }
+        
+        Integer flag_investasi = edit.getDatausulan().getMste_flag_investasi();
+        if (flag_investasi ==null)
+        {
+            edit.getDatausulan().setMste_flag_investasi(new Integer(0));
+        }
+        
+        Integer flag_gmit = edit.getDatausulan().getMste_gmit();
+        if (flag_gmit == null){
+            edit.getDatausulan().setMste_gmit(new Integer(0));
+        }           
+        
+        HashMap param = new HashMap();
+        if(edit.getPemegang().getMste_spaj_asli() == null) edit.getPemegang().setMste_spaj_asli(1);
+       
+        if(CommonUtil.isEmpty(edit.getDatausulan().getMste_flag_el())){
+            edit.getDatausulan().setMste_flag_el(0);
+        }   
+        
+        
+        if(CommonUtil.isEmpty(edit.getDatausulan().getMste_flag_el())){
+			edit.getDatausulan().setMste_flag_el(0);
+		};
+        param.put("pemegang",edit.getPemegang());
+        param.put("tertanggung",edit.getTertanggung());
+        param.put("datausulan",edit.getDatausulan());
+        param.put("agen",edit.getAgen());
+        int rowupdated = commonDao.updateMstInsured(param);
+        if ( rowupdated<=0)
+        {
+        	 commonDao.insertMstInsured(param);
+        }
+        
+        String []pendapatanRutinBulan = edit.getTertanggung().getPendapatanBulan();
+        String []tujuanInvestasi = edit.getTertanggung().getTujuanInvestasi();
+        try {
+			deleteMstKyc(strTmpSPAJ, "3", "1", commonDao);
+			 Integer counter=0;  
+	            for(int i=0;i<pendapatanRutinBulan.length;i++){
+	                if(!pendapatanRutinBulan[i].contains("-")){
+	                    insertKyc(strTmpSPAJ, counter++, "3", "1", pendapatanRutinBulan[i], commonDao);
+	                }
+	            }  
+	            
+	            
+	            deleteMstKyc( strTmpSPAJ, "5", "1", commonDao);    
+	            for(int i=0;i<tujuanInvestasi.length;i++){
+	                if(!tujuanInvestasi[i].contains("-")){
+	                insertKyc(strTmpSPAJ, counter++, "5", "1", tujuanInvestasi[i], commonDao);
+	                }
+	            }
+	            
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	
 }

@@ -37,6 +37,8 @@
         <mapper resource="com/app/xml/common/delete.xml" />
         
         
+        <mapper resource="com/app/xml/productbisnis/select.xml" />
+        
  </mappers>
  
  

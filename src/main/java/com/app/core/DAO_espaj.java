@@ -5125,6 +5125,7 @@ mapAgentCodeAO.put("AGENT_4", "901841");*/
 	        String lsbs_id = "190";     
 //	        if(selectPositionSpaj( edit.getPemegang().getReg_spaj(), mapper ) != 3 ){
 	            String result_akseptasi = prosesAkseptasiSpeedy(edit.getPemegang().getReg_spaj(),  edit.getPemegang().getLus_id().toString(), mapper);
+	            System.out.println("result akseptasi:"+result_akseptasi);
 	            if(!result_akseptasi.equalsIgnoreCase("sukses")){
 	                Integer error = 1;
 	            }else{

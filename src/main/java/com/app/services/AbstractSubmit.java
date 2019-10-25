@@ -58,7 +58,6 @@ abstract class AbstractSubmit {
 	}
 	
 	protected abstract Cmdeditbac save(Cmdeditbac edit) throws Exception;
-	
 	protected void save_product_insured(Cmdeditbac edit, String counterSpaj,
 				Integer v_intActionBy, Integer flag_jenis_plan, Date ldt_endpay1,
 				User currentUser, CommonDao commonDao) {
@@ -278,8 +277,47 @@ abstract class AbstractSubmit {
             for (int i =0 ; i<dtrd.size();i++)
             {
                 Double diskon_karyawan = 1.0;
+                Datarider rd = new Datarider();
+                Object obj = dtrd.get(i);
+                if(obj instanceof Map){
+                	Map o = (Map)obj;
+                	rd = new Datarider();
+                	rd.setLsbs_id((Integer)o.get("lsbs_id"));
+                	rd.setLsdbs_number((Integer)o.get("lsbs_number"));
+                	rd.setMspr_unit((Integer)o.get("mspr_unit"));
+                	rd.setMspr_class((Integer)o.get("mspr_class"));
+                	rd.setMspr_ins_period((Integer)o.get("mspr_ins_period"));
+                	rd.setMspr_tsi((Double)o.get("mspr_tsi"));
+                	/*rd.setMspr_end_date((Date)o.get("mspr_end_date"));
+                	rd.setMspr_beg_date((Date)o.get("mspr_beg_date"));
+                	rd.setMspr_end_pay((Date)o.get("mspr_end_pay"));
+                	*/
+                	rd.setMspr_end_date(new Date());
+
+                	rd.setMspr_beg_date(new Date());
+
+                	rd.setMspr_end_pay(new Date());
+                	rd.setMspr_rate((Double)o.get("mspr_rate"));
+                	rd.setMspr_persen((Integer)o.get("mspr_persen"));
+                	rd.setMspr_premium((Double)o.get("mspr_premium"));
+                	rd.setMrs_premi_tahunan((Double)o.get("mrs_premi_tahunan"));
+                	rd.setMspr_tsi_pa_a((Double)o.get("mspr_tsi_pa_a"));
+                	rd.setMspr_tsi_pa_b((Double)o.get("mspr_tsi_pa_b"));
+                	rd.setMspr_tsi_pa_d((Double)o.get("mspr_tsi_pa_d"));
+                	rd.setMspr_tsi_pa_d((Double)o.get("mspr_tsi_pa_m"));
+                	rd.setMspr_tt((Integer)o.get("mspr_tt"));
+                	rd.setMspr_extra((Double)o.get("mspr_extra"));
+                	
+                	
+                }else if(obj instanceof Datarider){
+                	rd= (Datarider)dtrd.get(i);
+                }
+                	
                 
-                Datarider rd= (Datarider)dtrd.get(i);
+
+                
+                
+
                 v_intRiderId[i] = rd.getLsbs_id();
                 v_intRiderNo[i] = rd.getLsdbs_number();
                 unitRider[i] = rd.getMspr_unit();
@@ -804,7 +842,33 @@ abstract class AbstractSubmit {
 
 	            for (int i=0; i<jmlpenerima.intValue();i++)
 	            {
-	                Benefeciary bf1= (Benefeciary)benef.get(i);
+	            	Object obj = benef.get(i);
+	            	Benefeciary bf1= new Benefeciary();
+	            	if(obj instanceof Map){
+	            		Map m = (Map) obj;
+	            		bf1.setReg_spaj((String)m.get("reg_spaj"));
+	            		bf1.setMste_insured_no((Integer)m.get("mste_insured_no"));
+	            		bf1.setMsaw_number((Integer)m.get("msaw_number"));
+	            		bf1.setMsaw_first((String)m.get("msaw_first"));
+	            		bf1.setMsaw_middle((String)m.get("msaw_middle"));
+	            		bf1.setMsaw_last((String)m.get("msaw_last"));
+	            		bf1.setMsaw_birth(new Date());
+	            		bf1.setSmsaw_birth((String)m.get("smsaw_birth"));
+	            		bf1.setLsre_id((Integer)m.get("lsre_id"));
+	            		bf1.setMsaw_persen((Double)m.get("msaw_persen"));
+	            		bf1.setLsre_relation((String)m.get("lsre_relation"));
+	            		bf1.setMsaw_sex((Integer)m.get("msaw_sex"));
+	            		bf1.setMsaw_sex_detail((String)m.get("msaw_sex_detail"));
+	            		bf1.setLsne_id((Integer)m.get("lsne_id"));
+	            		bf1.setLsne_negara((String)m.get("lsne_negara"));
+	            		bf1.setMsaw_ket((String)m.get("msaw_ket"));
+	             	}else if(obj instanceof Benefeciary){
+	            		bf1= (Benefeciary)benef.get(i);
+	            	}
+	            	
+	                
+	                
+	                
 	                bf1.setReg_spaj(strTmpSPAJ);
 	                bf1.setMsaw_number(new Integer(i+1));
 	            }
@@ -814,7 +878,33 @@ abstract class AbstractSubmit {
 	            {
 	                for (int i=0; i<jmlpenerima.intValue();i++)
 	                {
-	                    Benefeciary bf1= (Benefeciary)benef.get(i);
+
+		            	Object obj = benef.get(i);
+	                    Benefeciary bf1= new Benefeciary();
+		            	if(obj instanceof Map){
+		            		Map m = (Map) obj;
+		            		bf1.setReg_spaj((String)m.get("reg_spaj"));
+		            		bf1.setMste_insured_no((Integer)m.get("mste_insured_no"));
+		            		bf1.setMsaw_number((Integer)m.get("msaw_number"));
+		            		bf1.setMsaw_first((String)m.get("msaw_first"));
+		            		bf1.setMsaw_middle((String)m.get("msaw_middle"));
+		            		bf1.setMsaw_last((String)m.get("msaw_last"));
+		            		bf1.setMsaw_birth(new Date());
+		            		bf1.setSmsaw_birth((String)m.get("smsaw_birth"));
+		            		bf1.setLsre_id((Integer)m.get("lsre_id"));
+		            		bf1.setMsaw_persen((Double)m.get("msaw_persen"));
+		            		bf1.setLsre_relation((String)m.get("lsre_relation"));
+		            		bf1.setMsaw_sex((Integer)m.get("msaw_sex"));
+		            		bf1.setMsaw_sex_detail((String)m.get("msaw_sex_detail"));
+		            		bf1.setLsne_id((Integer)m.get("lsne_id"));
+		            		bf1.setLsne_negara((String)m.get("lsne_negara"));
+		            		bf1.setMsaw_ket((String)m.get("msaw_ket"));
+		             	}else if(obj instanceof Benefeciary){
+		            		bf1= (Benefeciary)benef.get(i);
+		            	}
+		            	
+		            	
+		            	
 	                    try {
 	                        insertMst_benefeciary(bf1, commonDao );
 	                    } catch (Exception e) {
@@ -3256,4 +3346,306 @@ protected void save_suamiistri_pp(Cmdeditbac edit, String counterSpaj, CommonDao
    	         }
    	         return result;
    	        }
+   	   
+   	   
+   	   
+   	protected void updateMstPolicyPosition(String spaj, Integer lspdId, Integer lstbId, CommonDao commonDao){
+        HashMap<String, Object> param = new HashMap<String, Object>();  
+        param.put("spaj", spaj);        
+        param.put("lspdId", lspdId);    
+        param.put("lstbId", lstbId);        
+        commonDao.updateMstPolicyPosition( param );  
+    }
+    
+   	
+    protected void updatePositionMstInsured(String spaj, Integer lspdId, Integer lssaId, Integer insuredNo, CommonDao commonDao)
+    {
+        Map param = new HashMap();
+        param.put("spaj", spaj);        
+        param.put("lspdId", lspdId);    
+        param.put("lssaId", lssaId);    
+        param.put("insuredNo", insuredNo);
+        
+        commonDao.updatePositionMstInsured( (HashMap<String, Object>) param );
+    }
+   	   
+    
+    public void insertMstPositionSpaj(String lus_id, String msps_desc, String reg_spaj, int addSecond, CommonDao commonDao){
+        Map p = new HashMap();
+        p.put("lus_id", lus_id);
+        p.put("msps_desc", msps_desc);
+        p.put("reg_spaj", reg_spaj);
+        p.put("addSecond", addSecond);          
+        commonDao.insertMstPositionSpaj( p );
+    }
+
+    
+    public String prosesSimultanMedis(String strTmpSPAJ, Integer lus_id, CommonDao commonDao){ 
+        String result = "";
+        HashMap<String, Object> params = new HashMap<String, Object>();             
+        params.put("spaj", strTmpSPAJ);
+        params.put("lus_id", lus_id);
+        params.put("result", "");
+        commonDao.prosesSimultanMedis(params);  
+        result = (String) params.get("result");
+        return result;
+    }
+    public String prosesValQuest(String strTmpSPAJ, Integer lus_id, CommonDao commonDao) throws Exception{ 
+        String result = "";
+        HashMap<String, Object> params = new HashMap<String, Object>();             
+        params.put("spaj", strTmpSPAJ);
+        params.put("lus_id", lus_id);
+        params.put("result", "");
+        commonDao.prosesValQuest(params);   
+        result = (String) params.get("result");
+        return result;
+    }       
+    
+    public void updateMstInsuredTglAdmin(String spaj,Integer insuredNo, Date tanggal,Integer show, CommonDao commonDao){
+        Map param = new HashMap();
+        param.put("spaj", spaj);
+        param.put("insuredNo", insuredNo);
+        param.put("show", show);
+        param.put("tanggal", tanggal);
+        commonDao.updateMstInsuredTglAdmin( param );       
+    }   
+    
+    public Integer updateMstpositionSpajTgl(String strTmpSPAJ, Integer userId, Date tglkirim, String desc, String keterangan, CommonDao commonDao ) {      
+        Integer result = 0; 
+        HashMap<String, Object> params = new HashMap<String, Object>();             
+        params.put("lus_id", userId);
+        params.put("spaj", strTmpSPAJ);
+        params.put("tglkirim",tglkirim);
+        params.put("msps_desc", desc);
+        params.put("keterangan", keterangan);
+        result = commonDao.updateMstpositionSpajTgl(params);
+        return result;
+    }       
+    
+    
+    public void updateProsesKyc(String spaj, Integer insured,String lusId, Integer mste_flag_Yuw, Date mste_kyc_date, CommonDao commonDao) throws Exception{
+        Map param=new HashMap();
+        param.put("reg_spaj", spaj);
+        param.put("mste_insured_no", insured);
+        param.put("mste_flag_uw", mste_flag_Yuw);
+        param.put("mste_kyc_date", mste_kyc_date);
+        param.put("lusId", lusId);
+        commonDao.updateProsesKyc( param );        
+    }
+    
+    public String prosesAkseptasiSpeedy(String s_spaj, String lus_id, CommonDao commonDao) throws Exception{
+        HashMap map = new HashMap();
+        String result = "";
+        map.put("lus_id", lus_id);
+        map.put("spaj", s_spaj);
+        map.put("result", result);
+        commonDao.prosesAkseptasiSpeedy(map);   
+        result = (String) map.get("result");            
+        return result;          
+    }
+    public void updateFlagAprove(String reg_spaj,Integer flag_approve, String kolom, CommonDao commonDao){
+        Map map = new HashMap();
+        map.put("reg_spaj", reg_spaj);
+        map.put("kolom", kolom);
+        map.put("flag_approve", flag_approve);
+        commonDao.updateFlagAprove(map);
+    }
+    
+    
+    public String save_reinsNew(String spaj, CommonDao commonDao){
+        String result="";
+        Map param = new HashMap();
+        param.put("reg_spaj", spaj);    
+         param.put("result", "");
+         commonDao.save_reinsNew( param ); 
+        result = (String) param.get("result");
+        return result;
+    }
+    
+    
+    
+    
+    protected void updateStatusToTransferSpeedy(Cmdeditbac edit, CommonDao commonDao){
+        updateMstPolicyPosition(edit.getPemegang().getReg_spaj(),new Integer(27),1, commonDao);
+        updatePositionMstInsured(edit.getPemegang().getReg_spaj(),new Integer(27), 1 ,1, commonDao);              
+        insertMstPositionSpaj(edit.getPemegang().getLus_id().toString(),"TRANSFER KE SPEEDY", edit.getPemegang().getReg_spaj(), 5, commonDao);
+    }
+    
+   	 protected void Paralel_Lanjutan (Cmdeditbac edit, CommonDao commonDao)throws Exception{
+   		updateStatusToTransferSpeedy(edit, commonDao);
+   		
+   		String result_simultan = prosesSimultanMedis(edit.getPemegang().getReg_spaj(), edit.getPemegang().getLus_id(), commonDao );                
+        String result_kuesioner = prosesValQuest(edit.getPemegang().getReg_spaj(), edit.getPemegang().getLus_id(), commonDao);
+        
+        System.out.println("result simultan:"+result_simultan);
+
+        System.out.println("result questioner:"+result_kuesioner);
+     
+         
+         
+         // Tgl Terima Doc 
+         Date tanggal = commonDao.selectSysdate();
+         updateMstInsuredTglAdmin(edit.getPemegang().getReg_spaj(), 1, tanggal, 2, commonDao);
+         
+         Integer exist = selectMstTransHist( edit.getPemegang().getReg_spaj(), commonDao ); 
+         if(exist > 0){
+             updateMstTransHistory(edit.getPemegang().getReg_spaj(), "tgl_berkas_terima_uw", tanggal, null, "0", commonDao);        
+         }else{
+             insertMstTransHistory(edit.getPemegang().getReg_spaj(), "tgl_berkas_terima_uw", tanggal, null, "0", commonDao);        
+         }               
+         if(updateMstpositionSpajTgl(edit.getPemegang().getReg_spaj(), edit.getPemegang().getLus_id(), tanggal, "TGL SPAJ DOC","TGL SPAJ DOC", commonDao)==0){
+             insertMstPositionSpaj(edit.getPemegang().getLus_id().toString(), "TGL SPAJ DOC", edit.getPemegang().getReg_spaj(), 2, commonDao);
+         }
+      
+         // Tgl Terima SPAJ
+         updateMstInsuredTglAdmin(edit.getPemegang().getReg_spaj(), 1, tanggal, 0, commonDao);
+             exist = selectMstTransHist( edit.getPemegang().getReg_spaj(), commonDao ); 
+         if(exist > 0){
+             updateMstTransHistory(edit.getPemegang().getReg_spaj(), "tgl_terima_spaj_uw", tanggal, null, "0", commonDao);      
+         }else{
+             insertMstTransHistory(edit.getPemegang().getReg_spaj(), "tgl_terima_spaj_uw", tanggal, null, "0", commonDao);      
+         }
+         if(updateMstpositionSpajTgl(edit.getPemegang().getReg_spaj(), edit.getPemegang().getLus_id(), tanggal, "TGL TERIMA SPAJ","TGL TERIMA SPAJ", commonDao)==0){
+             insertMstPositionSpaj(edit.getPemegang().getLus_id().toString(), "TGL TERIMA SPAJ", edit.getPemegang().getReg_spaj(), 3, commonDao);
+         }
+       
+         //KYC
+         updateProsesKyc(edit.getPemegang().getReg_spaj(), 1, edit.getPemegang().getLus_id().toString(), 0, tanggal, commonDao);
+             
+         //tidak ada checklist
+         //Copy Checklist untuk Update flag_uw =1 , PROSES CHECKLIST DI UW
+         //CommandChecklist cmd = new CommandChecklist();
+         //cmd.setLspd_id(27);
+         //cmd.setReg_spaj(edit.getPemegang().getReg_spaj());
+         //cmd.setListChecklist(selectCheckListBySpaj(edit.getPemegang().getReg_spaj(), mapper));
+         //saveChecklist(cmd, edit.getPemegang().getLus_id().toString(), tanggal, mapper);
+                 
+         //Proses Akseptasi , langsung Accepted
+         //(8 SEPT 2015) - apabila status akseptasi nya further, tidak perlu otomatis menjalankan akseptasi.(terkait dengan perubahan questionare kesehatan).
+         //(7 OKT 2015) - apabila produk save series  lakukan proses akseptasi/*
+         String lsbs_id = "190";     
+//         if(selectPositionSpaj( edit.getPemegang().getReg_spaj(), mapper ) != 3 ){
+        
+         String result_akseptasi = prosesAkseptasiSpeedy(edit.getPemegang().getReg_spaj(),  edit.getPemegang().getLus_id().toString(), commonDao);
+             if(!result_akseptasi.equalsIgnoreCase("sukses")){
+                 Integer error = 1;
+             }else{
+                 //Udh Akseptasi , Update Flag done untuk NB
+                 updateFlagAprove(edit.getPemegang().getReg_spaj(),1,"flag_approve_uw", commonDao);
+                  exist = selectMstTransHist( edit.getPemegang().getReg_spaj(), commonDao );    
+                 if(exist > 0){
+                     updateMstTransHistory(edit.getPemegang().getReg_spaj(), "tgl_approve_uw", tanggal, null, "0", commonDao);                  
+                 }else{
+                     insertMstTransHistory(edit.getPemegang().getReg_spaj(), "tgl_approve_uw", tanggal, null, "0", commonDao);  
+                 }                       
+                 insertMstPositionSpaj(edit.getPemegang().getLus_id().toString(), "Approve By New Business/UW", edit.getPemegang().getReg_spaj(), 4, commonDao);
+
+             }
+//         }
+         
+         // execute f_jurnal approval NB
+            
+         try{
+         //	String UWapproval = prosesJurnalUWApproval(edit.getPemegang().getReg_spaj(), 0, mapper );  
+         }catch (Exception e){
+         	e.printStackTrace();
+         }
+             
+         String result_reins = save_reinsNew(edit.getPemegang().getReg_spaj(), commonDao);              
+         //err-- HashMap mtStatus = selectWfGetStatus(edit.getPemegang().getReg_spaj(),1, mapper);
+
+         updateMstPolicyPosition(edit.getPemegang().getReg_spaj(),new Integer(251),1, commonDao);
+         updatePositionMstInsured(edit.getPemegang().getReg_spaj(),new Integer(251), 5 ,1, commonDao);              
+         
+         insertMstPositionSpaj(edit.getPemegang().getLus_id().toString(),"TRANSFER KE WAITING PROSES NB", edit.getPemegang().getReg_spaj(), 5, commonDao);
+         String OK = "";
+         
+     }
+   	 
+   	 
+   	protected void Paralel_Lanjutan2 (Cmdeditbac edit, CommonDao commonDao)throws Exception{
+   		updateStatusToTransferSpeedy(edit, commonDao);
+         
+         
+         
+         
+         String result_simultan = prosesSimultanMedis(edit.getPemegang().getReg_spaj(), edit.getPemegang().getLus_id(), commonDao );                
+         String result_kuesioner = prosesValQuest(edit.getPemegang().getReg_spaj(), edit.getPemegang().getLus_id(), commonDao);
+         
+         // Tgl Terima Doc 
+         Date tanggal = commonDao.selectSysdate();
+         updateMstInsuredTglAdmin(edit.getPemegang().getReg_spaj(), 1, tanggal, 2, commonDao);
+         
+         Integer exist = selectMstTransHist( edit.getPemegang().getReg_spaj(), commonDao ); 
+         if(exist > 0){
+             updateMstTransHistory(edit.getPemegang().getReg_spaj(), "tgl_berkas_terima_uw", tanggal, null, "0", commonDao);        
+         }else{
+             insertMstTransHistory(edit.getPemegang().getReg_spaj(), "tgl_berkas_terima_uw", tanggal, null, "0", commonDao);        
+         }               
+         if(updateMstpositionSpajTgl(edit.getPemegang().getReg_spaj(), edit.getPemegang().getLus_id(), tanggal, "TGL SPAJ DOC","TGL SPAJ DOC", commonDao)==0){
+             insertMstPositionSpaj(edit.getPemegang().getLus_id().toString(), "TGL SPAJ DOC", edit.getPemegang().getReg_spaj(), 2, commonDao);
+         }
+         
+         // Tgl Terima SPAJ
+         updateMstInsuredTglAdmin(edit.getPemegang().getReg_spaj(), 1, tanggal, 0, commonDao);
+             exist = selectMstTransHist( edit.getPemegang().getReg_spaj(), commonDao ); 
+         if(exist > 0){
+             updateMstTransHistory(edit.getPemegang().getReg_spaj(), "tgl_terima_spaj_uw", tanggal, null, "0", commonDao);      
+         }else{
+             insertMstTransHistory(edit.getPemegang().getReg_spaj(), "tgl_terima_spaj_uw", tanggal, null, "0", commonDao);      
+         }
+         if(updateMstpositionSpajTgl(edit.getPemegang().getReg_spaj(), edit.getPemegang().getLus_id(), tanggal, "TGL TERIMA SPAJ","TGL TERIMA SPAJ", commonDao)==0){
+             insertMstPositionSpaj(edit.getPemegang().getLus_id().toString(), "TGL TERIMA SPAJ", edit.getPemegang().getReg_spaj(), 3, commonDao);
+         }
+     
+         //KYC
+         updateProsesKyc(edit.getPemegang().getReg_spaj(), 1, edit.getPemegang().getLus_id().toString(), 0, tanggal, commonDao);
+             
+         //tidak ada checklist
+         //Copy Checklist untuk Update flag_uw =1 , PROSES CHECKLIST DI UW
+         //CommandChecklist cmd = new CommandChecklist();
+         //cmd.setLspd_id(27);
+         //cmd.setReg_spaj(edit.getPemegang().getReg_spaj());
+         //cmd.setListChecklist(selectCheckListBySpaj(edit.getPemegang().getReg_spaj(), mapper));
+         //saveChecklist(cmd, edit.getPemegang().getLus_id().toString(), tanggal, mapper);
+                 
+         //Proses Akseptasi , langsung Accepted
+         //(8 SEPT 2015) - apabila status akseptasi nya further, tidak perlu otomatis menjalankan akseptasi.(terkait dengan perubahan questionare kesehatan).
+         //(7 OKT 2015) - apabila produk save series  lakukan proses akseptasi/*
+         String lsbs_id = "190";     
+//         if(selectPositionSpaj( edit.getPemegang().getReg_spaj(), mapper ) != 3 ){
+             String result_akseptasi = prosesAkseptasiSpeedy(edit.getPemegang().getReg_spaj(),  edit.getPemegang().getLus_id().toString(), commonDao);
+             if(!result_akseptasi.equalsIgnoreCase("sukses")){
+                 Integer error = 1;
+             }else{
+                 //Udh Akseptasi , Update Flag done untuk NB
+                 updateFlagAprove(edit.getPemegang().getReg_spaj(),1,"flag_approve_uw", commonDao);
+                  exist = selectMstTransHist( edit.getPemegang().getReg_spaj(), commonDao );    
+                 if(exist > 0){
+                     updateMstTransHistory(edit.getPemegang().getReg_spaj(), "tgl_approve_uw", tanggal, null, "0", commonDao);                  
+                 }else{
+                     insertMstTransHistory(edit.getPemegang().getReg_spaj(), "tgl_approve_uw", tanggal, null, "0", commonDao);  
+                 }                       
+                 insertMstPositionSpaj(edit.getPemegang().getLus_id().toString(), "Approve By New Business/UW", edit.getPemegang().getReg_spaj(), 4, commonDao);
+
+             }
+//         }
+         
+         // execute f_jurnal approval NB
+         try{
+         //	String UWapproval = prosesJurnalUWApproval(edit.getPemegang().getReg_spaj(), 0, mapper );  
+         }catch (Exception e){
+         	e.printStackTrace();
+         }
+             
+         String result_reins = save_reinsNew(edit.getPemegang().getReg_spaj(), commonDao);              
+         //err-- HashMap mtStatus = selectWfGetStatus(edit.getPemegang().getReg_spaj(),1, mapper);
+
+         updateMstPolicyPosition(edit.getPemegang().getReg_spaj(),new Integer(251),1, commonDao);
+         updatePositionMstInsured(edit.getPemegang().getReg_spaj(),new Integer(251), 5 ,1, commonDao);              
+         insertMstPositionSpaj(edit.getPemegang().getLus_id().toString(),"TRANSFER KE WAITING PROSES NB", edit.getPemegang().getReg_spaj(), 5, commonDao);
+         String OK = "";
+         
+     }
+     
 }

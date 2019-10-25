@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace='com.app.dao.VPProductBisnisDao'>
+ <select id="selectVpProductBisnis" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	select * from eka.vp_product_bisnis where product_id =#{lsbs_id} and sub_product_id =#{lsdbs_number} and pay_mode_id=#{paymode} and currency_id =#{kurs}
+  </select>
+</mapper>
