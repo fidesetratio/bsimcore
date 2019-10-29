@@ -80,7 +80,7 @@ public class BsimBootApplication  implements CommandLineRunner {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		};
 		
 		System.out.println("data is fine");
 		System.out.println("firstname:"+edit.getPemegang().getMcl_first());

@@ -5,4 +5,59 @@
  <select id="selectVpProductBisnis" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 	select * from eka.vp_product_bisnis where product_id =#{lsbs_id} and sub_product_id =#{lsdbs_number} and pay_mode_id=#{paymode} and currency_id =#{kurs}
   </select>
+ <select id="selectMstLanguangeScripts" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	select * from eka.mst_language_scripts
+  </select>
+
+ <select id="selectNProdVar" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	select * from eka.n_prod_var where lsbs_id =#{lsbs_id} and lsdbs_number =#{lsdbs_number}
+  </select>
+  
+  <select id="selectNProdFunction" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	select * from eka.n_prod_function where lsbs_id =#{lsbs_id} and lsdbs_number =#{lsdbs_number} and cb = #{cara_bayar} and kurs=#{kurs}
+  </select>
+  
+   <select id="selectNProdFunctionOrderBy" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	select * from eka.n_prod_function where lsbs_id =#{lsbs_id} and lsdbs_number =#{lsdbs_number} and cb = #{cara_bayar} and kurs=#{kurs} order by urutan asc
+  </select>
+  
+  
+   <select id="selectNilaiNew" resultType="Double" parameterType="java.util.HashMap">
+		SELECT lstab_value
+		  FROM eka.lst_table_new
+		 WHERE (lstab_jenis = #{jenis})
+		   AND (lsbs_id = #{lsbs})
+		   AND (lsdbs_number = #{lsdbs})
+		   AND (lku_id = #{lku})
+		   AND (lscb_id = #{lscb})
+		   AND (lstab_lama_bayar = #{lamaBayar})
+		   AND (lstab_lama_tanggung = #{lamaTanggung})
+		   <if test="lsbs != 172">
+		   	  AND (lstab_tahun_ke = #{tahunKe})
+		   </if>
+		   AND (lstab_age = #{umur})
+  </select>
+  
+    <select id="selectNilai" resultType="Double" parameterType="java.util.HashMap">
+		SELECT eka.lst_table.lstab_value
+		  FROM eka.lst_table
+		 WHERE (eka.lst_table.lstab_jenis = #{jenis})
+		   AND (eka.lst_table.lsbs_id = #{lsbs})
+		   AND (eka.lst_table.lku_id = #{lku})
+		   AND (eka.lst_table.lscb_id = #{lscb})
+		   AND (eka.lst_table.lstab_lama_bayar = #{lamaBayar})
+		   AND (eka.lst_table.lstab_lama_tanggung = #{lamaTanggung})
+		   AND (eka.lst_table.lstab_tahun_ke = #{tahunKe})
+		   AND (eka.lst_table.lstab_age = #{umur})
+	</select>
+  
+   <select id="selectPremiSuperSehat" resultType="Double" parameterType="java.util.HashMap">
+		SELECT eka.lst_premi_ss.lsprss_value
+		  FROM eka.lst_premi_ss
+		 WHERE (eka.lst_premi_ss.lsbs_id = #{lsbs})
+		   AND (eka.lst_premi_ss.lsprss_plan = #{lsdbs})
+		   AND (eka.lst_premi_ss.lsprss_age = #{umur})
+		   AND (eka.lst_premi_ss.lku_id = #{lku})
+	</select>
+
 </mapper>
