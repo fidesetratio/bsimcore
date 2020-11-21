@@ -5,11 +5,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.xml.bind.annotation.XmlRootElement;
 
 import com.app.utils.CommonUtil;
 
-@XmlRootElement
+
 public class Keluarga implements Serializable {
 	/**
 	 *@author Deddy

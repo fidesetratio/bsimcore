@@ -2,9 +2,7 @@ package com.app.model.gadget.sub;
 
 import java.io.Serializable;
 
-import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 public class Pendanaan implements Serializable {
 	/**
 	 *@author Deddy

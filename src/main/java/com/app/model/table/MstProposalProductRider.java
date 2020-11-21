@@ -4,9 +4,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 
-import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
+
 public class MstProposalProductRider implements Serializable {
 	
 	/**

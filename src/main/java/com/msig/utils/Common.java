@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 

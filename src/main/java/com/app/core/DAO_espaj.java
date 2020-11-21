@@ -18,7 +18,7 @@ import javax.servlet.ServletException;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.dao.DataAccessException;
-import org.springframework.test.context.jdbc.Sql;
+
 
 import com.app.dao.CommonDao;
 import com.app.model.esehat.DropDownMenu;
